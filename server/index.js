@@ -12,7 +12,8 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(
   cors({
-    origin: ["https://drink-cart.vercel.app/"],
+    origin: "*",
+    // origin: ["https://drink-cart.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -21,12 +22,10 @@ app.use(
 app.get("/", (req, res) => res.send("Hello to DrinkCart"));
 app.use("/drinkcart", drinkcartRoutes);
 
-const CONNECTION_URL =
-  "mongodb+srv://drinkcartadmin:drinkcartadmin123@cluster0.h0oi1nv.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 8000;
 
 mongoose
-  .connect(CONNECTION_URL)
+  .connect(process.env.CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
