@@ -17,7 +17,11 @@ const statusList = computed(() => {
     return [toDeliver.value, delivered.value, notDelivered.value];
 })
 onMounted(async () => {
-    await getData();
+    try {
+        await getData();
+    } catch (error) {
+        console.log(error);
+    }
 })
 const getData = async () => {
     customerData.value = (await getAllCustomersInfo()).data as ICustomerInfo[];
