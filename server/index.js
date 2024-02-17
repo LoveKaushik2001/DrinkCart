@@ -21,12 +21,12 @@ app.use(
 app.get("/", (req, res) => res.send("Hello to DrinkCart"));
 app.use("/drinkcart", drinkcartRoutes);
 
-// const CONNECTION_URL =
-//   "mongodb+srv://drinkcartadmin:drinkcartadmin123@cluster0.h0oi1nv.mongodb.net/?retryWrites=true&w=majority";
+const CONNECTION_URL =
+  "mongodb+srv://drinkcartadmin:drinkcartadmin123@cluster0.h0oi1nv.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 8000;
 
 mongoose
-  .connect(process.env.CONNECTION_URL)
+  .connect(CONNECTION_URL)
   .then(() =>
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
   )
