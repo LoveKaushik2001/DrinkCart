@@ -10,7 +10,13 @@ const app = express();
 dotenv.config();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://drink-cart-6s42ltd33-love-kaushiks-projects.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 app.get("/", (req, res) => res.send("Hello to DrinkCart"));
 app.use("/drinkcart", drinkcartRoutes);
