@@ -26,6 +26,7 @@ mongoose
   )
   .catch((error) => console.error(error.message));
 
+export default app;
 // Testing code added
 // app.listen(8000, () => {
 //   console.log("Sever started running at 8000!");
