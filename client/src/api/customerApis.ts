@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://drink-cart-9pejyif2f-love-kaushiks-projects.vercel.app",
+  baseURL: "https://drink-cart-api.vercel.app",
 });
 
 export const getAllCustomersInfo = () => API.get("/drinkcart/getAllCustomers");
