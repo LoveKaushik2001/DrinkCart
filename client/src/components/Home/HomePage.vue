@@ -66,7 +66,8 @@ const changeStatus = (event: any) => {
                     'rounded-xl bg-white p-3',
                     'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                 ]">
-                    <StatusList v-if="list.length" :list="list" @change-status="changeStatus" />
+                    <StatusList v-if="list.length" :list="list" @change-status="changeStatus"
+                        :key="statusList.toString()" />
                 </TabPanel>
             </TabPanels>
         </TabGroup>

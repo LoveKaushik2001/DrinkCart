@@ -24,7 +24,7 @@ app.use("/drinkcart", drinkcartRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://drinkcartadmin:drinkcartadmin123@cluster0.h0oi1nv.mongodb.net/?retryWrites=true&w=majority";
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 mongoose
   .connect(CONNECTION_URL)

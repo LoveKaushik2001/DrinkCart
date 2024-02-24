@@ -22,7 +22,6 @@ const handleDragEnd = () => {
 </script>
 <template>
     <div>
-        order - name
         <draggable v-model="orderList" @end="handleDragEnd" :item-key="(item: IMasterDeliveryInfo) => item.deliveryOrder">
             <template #item="{ element }: { element: IMasterDeliveryInfo }">
                 <div class="w-full px-4 pt-16">
