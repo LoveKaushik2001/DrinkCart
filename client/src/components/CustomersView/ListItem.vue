@@ -16,14 +16,25 @@
                         <p><strong>Mobile Number:</strong> <a :href="`tel:${masterData.phoneNumber}`">{{
                             masterData.phoneNumber }}</a></p>
                     </div>
-                    <div class="items-to-deliver">
-                        <label style="font-style: oblique;">Deliveries</label>
-                        <p v-if="masterData.itemsToBeDelivered.gloriousRed">Red: {{
-                            masterData.itemsToBeDelivered.gloriousRed }}</p>
-                        <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
-                            masterData.itemsToBeDelivered.greenDetox }}</p>
-                        <p v-if="masterData.itemsToBeDelivered.salad">Salad: {{ masterData.itemsToBeDelivered.salad }}</p>
-                        <p v-if="masterData.itemsToBeDelivered.soup">Soup: {{ masterData.itemsToBeDelivered.soup }}</p>
+                    <div class="grid-container">
+                        <div class="items-to-deliver" style="background-color: aliceblue;">
+                            <label style="font-style: oblique; color: rgb(140, 109, 0);">Deliveries</label>
+                            <p v-if="masterData.itemsToBeDelivered.gloriousRed">Red: {{
+                                masterData.itemsToBeDelivered.gloriousRed }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
+                                masterData.itemsToBeDelivered.greenDetox }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.salad">Salad: {{ masterData.itemsToBeDelivered.salad }}
+                            </p>
+                            <p v-if="masterData.itemsToBeDelivered.soup">Soup: {{ masterData.itemsToBeDelivered.soup }}</p>
+                        </div>
+                        <div class="items-to-deliver" style="background-color: beige;">
+                            <label style="font-style: oblique; color: rgb(140, 109, 0);">Empty Bottles</label>
+                            <p v-if="masterData.itemsToBeCollected.gloriousRed">Red: {{
+                                masterData.itemsToBeCollected.gloriousRed }}</p>
+                            <p v-if="masterData.itemsToBeCollected.greenDetox">Green: {{
+                                masterData.itemsToBeCollected.greenDetox }}</p>
+                            <p v-if="masterData.itemsToBeCollected.soup">Soup: {{ masterData.itemsToBeCollected.soup }}</p>
+                        </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
                         <button @click="emit('delivered')" :class="['delivered-button']">Delivered</button>
@@ -104,6 +115,17 @@ const emit = defineEmits(['delivered', 'notDelivered']);
 
 .address {
     font-style: italic;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.items-to-deliver {
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
 .items-to-deliver p {
