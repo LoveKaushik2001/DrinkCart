@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: "*",
     // origin: ["https://drink-cart.vercel.app/"],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "PATCH"],
     credentials: true,
   })
 );

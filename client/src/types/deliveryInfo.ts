@@ -2,6 +2,7 @@ import { ICustomerInfo, IItems } from "./customerInfo";
 
 export interface IDeliveryInfo {
   customerId: string;
+  deliveryPoint: string;
   deliveryOrder: number;
   deliveryStatus: string;
   gloriousRed: number;
@@ -10,13 +11,22 @@ export interface IDeliveryInfo {
   soup: number;
 }
 
-export interface IMasterDeliveryInfo {
+export interface IClubbedData {
   customerId: string;
   customerName: string;
   phoneNumber: string;
+  organization: string;
+  deliveryPoint: string;
   address: string;
   deliveryOrder: number;
   deliveryStatus: string;
   itemsToBeDelivered: IItems;
   itemsToBeCollected: IItems;
+}
+
+export interface IMasterData {
+  organization: string;
+  masterData: IClubbedData[];
+  deliveryOrder: number;
+  deliveryStatus: string;
 }

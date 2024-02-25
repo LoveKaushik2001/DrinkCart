@@ -24,3 +24,16 @@ export const addDeliverySheet = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+//update status
+export const updateStatus = async (req, res) => {
+  const { ids, status } = req.body;
+  const condition = { customerId: { $in: ids } };
+  const update = { deliveryStatus: status };
+  try {
+    const result = await DeliveryInfo.updateMany(condition, update);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
