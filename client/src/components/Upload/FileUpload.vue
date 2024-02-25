@@ -23,10 +23,18 @@ const readFile = (event: Event) => {
                 const sheetName = workbook.SheetNames[0];
                 const sheet = workbook.Sheets[sheetName];
                 jsonData.value = XLSX.utils.sheet_to_json(sheet, { raw: false });
-                jsonData.value.forEach(customer => {
-                    Object.keys(customer).forEach(field => {
-                        if (typeof customer[field] === 'number' && XLSX.SSF.is_date(field)) {
-                            customer[field] = XLSX.SSF.parse_date_code(customer[field]);
+                jsonData.value.map(row => {
+                    Object.keys(row).forEach(key => {
+                        if (typeof row[key] === 'number' && XLSX.SSF.is_date(key)) {
+                            row[key] = XLSX.SSF.parse_date_code(row[key]);
+                        }
+                        const nestedFields = key.split('_');
+                        if (nestedFields?.length === 2) {
+                            if (!row[nestedFields[0]]) {
+                                row[nestedFields[0]] = {};
+                            }
+                            row[nestedFields[0]][nestedFields[1]] = row[key];
+                            delete row[key];
                         }
                     })
                 })

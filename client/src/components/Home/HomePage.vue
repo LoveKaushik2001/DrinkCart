@@ -59,13 +59,16 @@ const changeStatus = async (event: any) => {
             return data;
         })
     }
+    await updateDeliveryDbs(ids, event.status);
+    updateList();
+}
+const updateDeliveryDbs = async (ids: string[], status: string) => {
     try {
-        await updateDeliveryStatus(ids, event.status);
+        await updateDeliveryStatus(ids, status);
     } catch (error) {
         alert('Something went wrong while update.');
         location.reload();
     }
-    updateList();
 }
 </script>
 <template>
