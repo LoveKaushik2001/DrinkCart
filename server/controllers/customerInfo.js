@@ -19,6 +19,7 @@ export const addCustomerInfo = async (req, res) => {
   const customerData = req.body.customerData;
   const needToDrop = req.body.needToDrop;
   try {
+    console.log(customerData);
     if (needToDrop) await CustomerInfo.deleteMany();
     const result = await CustomerInfo.insertMany(customerData);
     res.status(201).json(result);

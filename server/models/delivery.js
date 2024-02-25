@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const deliverySchema = mongoose.Schema({
   customerId: String,
+  deliveryPoint: {
+    type: String,
+    default: "",
+  },
   deliveryOrder: Number,
   deliveryStatus: {
     type: String,

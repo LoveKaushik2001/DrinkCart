@@ -3,6 +3,7 @@ export interface ICustomerInfo {
   customerName: string;
   phoneNumber: string;
   address: string;
+  organization: string;
   deliveredItemsTillDate: IItems;
   bottlesRemaining: IItems;
   discountAvailed: number;

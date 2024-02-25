@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
-import { getAllCustomersInfo, getAllDeliveriesInfo } from '@/api';
-import { ICustomerInfo, IDeliveryInfo, IMasterDeliveryInfo } from '@/types';
+import { getAllCustomersInfo, getAllDeliveriesInfo, updateDeliveryStatus } from '@/api';
+import { ICustomerInfo, IDeliveryInfo, IMasterData } from '@/types';
 import { DeliveryStatus } from '@/constants';
 import { createFinalData } from '@/services';
 import StatusList from './StatusList.vue';
 const customerData = ref([] as ICustomerInfo[]);
 const deliveryData = ref([] as IDeliveryInfo[]);
-const masterData = ref([] as IMasterDeliveryInfo[])
-const toDeliver = ref([] as IMasterDeliveryInfo[]);
-const delivered = ref([] as IMasterDeliveryInfo[]);
-const notDelivered = ref([] as IMasterDeliveryInfo[]);
+const masterData = ref([] as IMasterData[])
+const toDeliver = ref([] as IMasterData[]);
+const delivered = ref([] as IMasterData[]);
+const notDelivered = ref([] as IMasterData[]);
 const deliveryStatus = ref(['To Deliver', 'Delivered', 'Not Delivered']);
 const statusList = computed(() => {
     return [toDeliver.value, delivered.value, notDelivered.value];
@@ -37,11 +37,34 @@ const updateList = () => {
     notDelivered.value = masterData.value.filter(data => data.deliveryStatus === DeliveryStatus.NOT_DELIVERED);
 }
 
-const changeStatus = (event: any) => {
-    masterData.value = masterData.value.map(data => {
-        if (data.customerId === event.id) data.deliveryStatus = event.status;
-        return data;
-    });
+const changeStatus = async (event: any) => {
+    const ids = [] as string[];
+    if (event.isOrganization) {
+        masterData.value = masterData.value.map(data => {
+            if (data.organization === event.organization) {
+                data.deliveryStatus = event.status;
+                data.masterData.forEach(customer => {
+                    customer.deliveryStatus = event.status
+                    ids.push(customer.customerId);
+                });
+            }
+            return data;
+        })
+    } else {
+        masterData.value = masterData.value.map(data => {
+            if (data.masterData.length === 1 && data.masterData[0].customerId === event.id) {
+                ids.push(data.masterData[0].customerId);
+                data.deliveryStatus = data.masterData[0].deliveryStatus = event.status
+            }
+            return data;
+        })
+    }
+    try {
+        await updateDeliveryStatus(ids, event.status);
+    } catch (error) {
+        alert('Something went wrong while update.');
+        location.reload();
+    }
     updateList();
 }
 </script>

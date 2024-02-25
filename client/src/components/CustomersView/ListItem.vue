@@ -5,7 +5,7 @@
                 <div class="button-content">
                     <div class="customer-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
-                        <span class="address">{{ masterData.address }}</span>
+                        <span class="address"> --- {{ masterData.address }}</span>
                     </div>
                     <ChevronDownIcon class="toggle-icon" />
                 </div>
@@ -37,13 +37,12 @@
   
 <script setup lang="ts">
 import { DeliveryStatus } from '@/constants';
-import { IMasterDeliveryInfo } from '@/types';
+import { IClubbedData } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { defineProps, defineEmits, toRefs } from 'vue';
-
 const props = defineProps<{
-    masterData: IMasterDeliveryInfo
+    masterData: IClubbedData
 }>();
 
 const { masterData } = toRefs(props);
@@ -57,6 +56,7 @@ const emit = defineEmits(['delivered', 'notDelivered']);
 }
 
 .disclosure-button {
+    width: 100%;
     background-color: #E5F2E5;
     border-radius: 8px;
     padding: 16px 24px;
@@ -147,4 +147,3 @@ const emit = defineEmits(['delivered', 'notDelivered']);
     opacity: 0;
 }
 </style>
-  

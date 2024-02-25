@@ -5,6 +5,10 @@ const customerSchema = mongoose.Schema({
   customerName: String,
   phoneNumber: String,
   address: String,
+  organization: {
+    type: String,
+    default: "",
+  },
   deliveredItemsTillDate: {
     gloriousRed: {
       type: Number,

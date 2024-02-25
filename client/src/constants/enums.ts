@@ -3,3 +3,8 @@ export enum DeliveryStatus {
   DELIVERED = "Delivered",
   NOT_DELIVERED = "Not Delivered",
 }
+
+export enum DeliveryPoint {
+  Home = "home",
+  ORGANIZATION = "organization",
+}
