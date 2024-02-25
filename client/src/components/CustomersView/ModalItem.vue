@@ -52,14 +52,25 @@
         class="open-modal-button bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-400">
         <div class="customer-info">
             <span class="organization">{{ data.organization }}</span>
-            <div class="items-to-deliver">
-                <label style="font-style: oblique;">Total Deliveries</label>
-                <p v-if="itemsToBeDelivered.gloriousRed">Red: {{
-                    itemsToBeDelivered.gloriousRed }}</p>
-                <p v-if="itemsToBeDelivered.greenDetox">Green: {{
-                    itemsToBeDelivered.greenDetox }}</p>
-                <p v-if="itemsToBeDelivered.salad">Salad: {{ itemsToBeDelivered.salad }}</p>
-                <p v-if="itemsToBeDelivered.soup">Soup: {{ itemsToBeDelivered.soup }}</p>
+            <div class="grid-container">
+                <div class="items-to-deliver">
+                    <label style="font-style: oblique;">Deliveries</label>
+                    <p v-if="itemsToBeDelivered.gloriousRed">Red: {{
+                        itemsToBeDelivered.gloriousRed }}</p>
+                    <p v-if="itemsToBeDelivered.greenDetox">Green: {{
+                        itemsToBeDelivered.greenDetox }}</p>
+                    <p v-if="itemsToBeDelivered.salad">Salad: {{ itemsToBeDelivered.salad }}</p>
+                    <p v-if="itemsToBeDelivered.soup">Soup: {{ itemsToBeDelivered.soup }}</p>
+                </div>
+                <div class="items-to-deliver">
+                    <label style="font-style: oblique;">Empty Bottles</label>
+                    <p v-if="itemsToBeCollected.gloriousRed">Red: {{
+                        itemsToBeCollected.gloriousRed }}</p>
+                    <p v-if="itemsToBeCollected.greenDetox">Green: {{
+                        itemsToBeCollected.greenDetox }}</p>
+                    <p v-if="itemsToBeCollected.salad">Salad: {{ itemsToBeCollected.salad }}</p>
+                    <p v-if="itemsToBeCollected.soup">Soup: {{ itemsToBeCollected.soup }}</p>
+                </div>
             </div>
             <div v-show="DeliveryStatus.TO_DELIVER === data.deliveryStatus" class="action-buttons">
                 <button @click.stop="emit('delivered')" :class="['delivered-button']">Delivered</button>
@@ -95,12 +106,23 @@ const itemsToBeDelivered = ref({
     salad: 0,
     soup: 0
 } as IItems);
+const itemsToBeCollected = ref({
+    gloriousRed: 0,
+    greenDetox: 0,
+    salad: 0,
+    soup: 0
+} as IItems);
 const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
         itemsToBeDelivered.value.salad += (customer.itemsToBeDelivered.salad)
         itemsToBeDelivered.value.soup += (customer.itemsToBeDelivered.soup)
+
+        itemsToBeCollected.value.gloriousRed += customer.itemsToBeCollected.gloriousRed;
+        itemsToBeCollected.value.greenDetox += (customer.itemsToBeCollected.greenDetox)
+        itemsToBeCollected.value.salad += (customer.itemsToBeCollected.salad)
+        itemsToBeCollected.value.soup += (customer.itemsToBeCollected.soup)
     })
 }
 const openModal = () => {
@@ -130,6 +152,17 @@ const closeModal = () => {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.items-to-deliver {
+    border: 1px solid #ccc;
+    padding: 10px;
 }
 
 .items-to-deliver p {

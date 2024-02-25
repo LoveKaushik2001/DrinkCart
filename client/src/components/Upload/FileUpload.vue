@@ -22,7 +22,14 @@ const readFile = (event: Event) => {
                 const workbook = XLSX.read(data, { type: 'array' });
                 const sheetName = workbook.SheetNames[0];
                 const sheet = workbook.Sheets[sheetName];
-                jsonData.value = XLSX.utils.sheet_to_json(sheet, { dateNF: 'dd/mm/yyyy' });
+                jsonData.value = XLSX.utils.sheet_to_json(sheet, { raw: false });
+                jsonData.value.forEach(customer => {
+                    Object.keys(customer).forEach(field => {
+                        if (typeof customer[field] === 'number' && XLSX.SSF.is_date(field)) {
+                            customer[field] = XLSX.SSF.parse_date_code(customer[field]);
+                        }
+                    })
+                })
             } catch (error) {
                 console.log('try: ', error);
             }
