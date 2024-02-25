@@ -38,7 +38,6 @@ const readFile = (event: Event) => {
 
 const addData = async (isUploaded: boolean) => {
     const dataToBeSaved = isUploaded ? jsonData.value : [customerDetail.value];
-    console.log(dataToBeSaved);
     try {
         if (file.value && file.value?.name.includes('customerInfo')) {
             const result = await addCustomerInfo(dataToBeSaved, isUploaded);
