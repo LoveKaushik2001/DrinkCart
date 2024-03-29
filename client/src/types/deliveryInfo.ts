@@ -3,6 +3,7 @@ import { ICustomerInfo, IItems } from "./customerInfo";
 export interface IDeliveryInfo {
   customerId: string;
   deliveryPoint: string;
+  deliveryRoute: string;
   deliveryOrder: number;
   deliveryStatus: string;
   gloriousRed: number;
@@ -17,6 +18,7 @@ export interface IClubbedData {
   phoneNumber: string;
   organization: string;
   deliveryPoint: string;
+  deliveryRoute: string;
   address: string;
   deliveryOrder: number;
   deliveryStatus: string;

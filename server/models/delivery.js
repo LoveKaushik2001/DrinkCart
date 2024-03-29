@@ -6,6 +6,10 @@ const deliverySchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  deliveryRoute: {
+    type: String,
+    default: "unspecified",
+  },
   deliveryOrder: Number,
   deliveryStatus: {
     type: String,
