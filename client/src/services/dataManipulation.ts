@@ -68,6 +68,7 @@ const getMasterData = (
       deliveryOrder: delivery.deliveryOrder,
       organization: customerData.organization,
       deliveryPoint: delivery.deliveryPoint,
+      deliveryRoute: delivery.deliveryRoute,
       itemsToBeDelivered: {
         gloriousRed: delivery.gloriousRed,
         greenDetox: delivery.greenDetox,

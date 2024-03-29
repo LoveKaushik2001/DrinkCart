@@ -3,37 +3,46 @@
         <Disclosure v-slot="{ open }">
             <DisclosureButton class="disclosure-button" :class="{ 'open': open }">
                 <div class="button-content">
-                    <div class="customer-info">
-                        <span class="customer-name">{{ masterData.customerName }}</span>
-                        <span class="address"> --- {{ masterData.address }}</span>
+                    <div class="address-wrapper">
+                        <div class="customer-info">
+                            <!-- Adjusted width to 100% -->
+                            <span class="address">{{ masterData.address }}</span>
+                        </div>
                     </div>
-                    <ChevronDownIcon class="toggle-icon" />
+                    <div class="chevron-wrapper">
+                        <ChevronDownIcon class="toggle-icon" />
+                    </div>
                 </div>
             </DisclosureButton>
             <Transition name="fade">
                 <DisclosurePanel class="details-panel" v-show="open">
                     <div class="contact-info">
+                        <span class="customer-name">{{ masterData.customerName }}</span>
                         <p><strong>Mobile Number:</strong> <a :href="`tel:${masterData.phoneNumber}`">{{
-                            masterData.phoneNumber }}</a></p>
+            masterData.phoneNumber }}</a></p>
                     </div>
                     <div class="grid-container">
                         <div class="items-to-deliver" style="background-color: aliceblue;">
                             <label style="font-style: oblique; color: rgb(140, 109, 0);">Deliveries</label>
                             <p v-if="masterData.itemsToBeDelivered.gloriousRed">Red: {{
-                                masterData.itemsToBeDelivered.gloriousRed }}</p>
+            masterData.itemsToBeDelivered.gloriousRed }}</p>
                             <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
-                                masterData.itemsToBeDelivered.greenDetox }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.salad">Salad: {{ masterData.itemsToBeDelivered.salad }}
+            masterData.itemsToBeDelivered.greenDetox }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.salad">Salad: {{ masterData.itemsToBeDelivered.salad
+                                }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.soup">Shikanji: {{ masterData.itemsToBeDelivered.soup
+                                }}
                             </p>
-                            <p v-if="masterData.itemsToBeDelivered.soup">Soup: {{ masterData.itemsToBeDelivered.soup }}</p>
                         </div>
                         <div class="items-to-deliver" style="background-color: beige;">
                             <label style="font-style: oblique; color: rgb(140, 109, 0);">Empty Bottles</label>
                             <p v-if="masterData.itemsToBeCollected.gloriousRed">Red: {{
-                                masterData.itemsToBeCollected.gloriousRed }}</p>
+            masterData.itemsToBeCollected.gloriousRed }}</p>
                             <p v-if="masterData.itemsToBeCollected.greenDetox">Green: {{
-                                masterData.itemsToBeCollected.greenDetox }}</p>
-                            <p v-if="masterData.itemsToBeCollected.soup">Soup: {{ masterData.itemsToBeCollected.soup }}</p>
+            masterData.itemsToBeCollected.greenDetox }}</p>
+                            <p v-if="masterData.itemsToBeCollected.soup">Shikanji: {{ masterData.itemsToBeCollected.soup
+                                }}
+                            </p>
                         </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
@@ -45,7 +54,7 @@
         </Disclosure>
     </div>
 </template>
-  
+
 <script setup lang="ts">
 import { DeliveryStatus } from '@/constants';
 import { IClubbedData } from '@/types';
@@ -59,7 +68,7 @@ const props = defineProps<{
 const { masterData } = toRefs(props);
 const emit = defineEmits(['delivered', 'notDelivered']);
 </script>
-  
+
 <style scoped>
 .delivery-info {
     margin-bottom: 10px;
@@ -90,8 +99,19 @@ const emit = defineEmits(['delivered', 'notDelivered']);
     align-items: center;
 }
 
+.address-wrapper {
+    flex-grow: 1;
+}
+
+
 .toggle-icon {
     color: #2D635E;
+    width: 24px;
+    height: 24px;
+}
+
+.chevron-wrapper {
+    margin-left: 10px;
 }
 
 .open .toggle-icon {
@@ -115,6 +135,8 @@ const emit = defineEmits(['delivered', 'notDelivered']);
 
 .address {
     font-style: italic;
+    /* Adjusted width to 100% */
+    width: 100%;
 }
 
 .grid-container {

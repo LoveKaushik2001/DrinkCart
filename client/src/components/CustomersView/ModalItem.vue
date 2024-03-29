@@ -2,8 +2,8 @@
     <div>
         <TransitionRoot appear :show="isOpen" as="template">
             <Dialog as="div" class="relative z-[101]" @close="closeModal">
-                <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
-                    leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
+                <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0"
+                    enter-to="opacity-100" leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
                     <div class="fixed inset-0 bg-gray-900 bg-opacity-80"></div>
                 </TransitionChild>
                 <div class="fixed inset-0 max-h-full overflow-auto base-scrollbar">
@@ -15,8 +15,9 @@
                                 X
                             </button>
                             <div class="modal-body text-gray-900">
-                                <h2 class="text-xl font-bold mb-4 text-center">All Customers Data for {{ data.organization
-                                }}</h2>
+                                <h2 class="text-xl font-bold mb-4 text-center">All Customers Data for {{
+            data.organization
+        }}</h2>
                                 <table class="w-full">
                                     <thead>
                                         <tr>
@@ -24,18 +25,21 @@
                                             <th class="px-4 py-2">Red</th>
                                             <th class="px-4 py-2">Green</th>
                                             <th class="px-4 py-2">Salad</th>
-                                            <th class="px-4 py-2">Soup</th>
+                                            <th class="px-4 py-2">Shikanji</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <template v-for="(customer, index) in data.masterData" :key="index">
                                             <tr>
                                                 <td class="border px-4 py-2">{{ customer.customerName }}</td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.gloriousRed }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.gloriousRed
+                                                    }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.greenDetox }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.greenDetox
+                                                    }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.salad }}</td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.salad }}
+                                                </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.soup }}</td>
                                             </tr>
                                         </template>
@@ -56,20 +60,20 @@
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Deliveries</label>
                     <p v-if="itemsToBeDelivered.gloriousRed">Red: {{
-                        itemsToBeDelivered.gloriousRed }}</p>
+            itemsToBeDelivered.gloriousRed }}</p>
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
-                        itemsToBeDelivered.greenDetox }}</p>
+            itemsToBeDelivered.greenDetox }}</p>
                     <p v-if="itemsToBeDelivered.salad">Salad: {{ itemsToBeDelivered.salad }}</p>
-                    <p v-if="itemsToBeDelivered.soup">Soup: {{ itemsToBeDelivered.soup }}</p>
+                    <p v-if="itemsToBeDelivered.soup">Shikanji: {{ itemsToBeDelivered.soup }}</p>
                 </div>
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Empty Bottles</label>
                     <p v-if="itemsToBeCollected.gloriousRed">Red: {{
-                        itemsToBeCollected.gloriousRed }}</p>
+            itemsToBeCollected.gloriousRed }}</p>
                     <p v-if="itemsToBeCollected.greenDetox">Green: {{
-                        itemsToBeCollected.greenDetox }}</p>
+            itemsToBeCollected.greenDetox }}</p>
                     <p v-if="itemsToBeCollected.salad">Salad: {{ itemsToBeCollected.salad }}</p>
-                    <p v-if="itemsToBeCollected.soup">Soup: {{ itemsToBeCollected.soup }}</p>
+                    <p v-if="itemsToBeCollected.soup">Shikanji: {{ itemsToBeCollected.soup }}</p>
                 </div>
             </div>
             <div v-show="DeliveryStatus.TO_DELIVER === data.deliveryStatus" class="action-buttons">
@@ -80,7 +84,7 @@
         </div>
     </div>
 </template>
-  
+
 <script setup lang="ts">
 import { defineProps, ref, toRefs, defineEmits, computed, onMounted } from 'vue';
 import {
@@ -133,7 +137,7 @@ const closeModal = () => {
     isOpen.value = false;
 }
 </script>
-  
+
 <style scoped>
 /* Adjustments to match health-focused styling */
 .modal-dialog {
@@ -188,4 +192,3 @@ const closeModal = () => {
     color: white;
 }
 </style>
-  
