@@ -16,6 +16,12 @@
             </DisclosureButton>
             <Transition name="fade">
                 <DisclosurePanel class="details-panel" v-show="open">
+                    <div v-if="masterData?.location?.lat?.trim() && masterData?.location?.lng?.trim()"
+                        class="location-cta" @click="openGoogleMaps(masterData.location)">
+                        <MapPinIcon class="map-pin-icon" />
+                        <span class="cta-text">View Location on Map</span>
+                    </div>
+                    <div v-else>Coordinates not provided</div>
                     <div class="contact-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
                         <p><strong>Mobile Number:</strong> <a :href="`tel:${masterData.phoneNumber}`">{{
@@ -57,9 +63,9 @@
 
 <script setup lang="ts">
 import { DeliveryStatus } from '@/constants';
-import { IClubbedData } from '@/types';
+import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid'
 import { defineProps, defineEmits, toRefs } from 'vue';
 const props = defineProps<{
     masterData: IClubbedData
@@ -67,6 +73,12 @@ const props = defineProps<{
 
 const { masterData } = toRefs(props);
 const emit = defineEmits(['delivered', 'notDelivered']);
+const openGoogleMaps = (location: ILocationCoordinates) => {
+    const lat = location.lat.trim();
+    const lng = location.lng.trim();
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+    window.location.href = googleMapsUrl;
+}
 </script>
 
 <style scoped>
@@ -189,5 +201,30 @@ const emit = defineEmits(['delivered', 'notDelivered']);
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
+}
+
+.location-cta {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #2D635E;
+}
+
+.location-cta:hover {
+    color: #046e47;
+    /* Adjust hover color as needed */
+}
+
+.map-pin-icon {
+    width: 20px;
+    /* Adjust icon size as needed */
+    height: 20px;
+    margin-right: 5px;
+    /* Adjust spacing between icon and text */
+}
+
+.cta-text {
+    font-size: 16px;
+    /* Adjust text size as needed */
 }
 </style>

@@ -1,4 +1,4 @@
-import { ICustomerInfo, IItems } from "./customerInfo";
+import { ICustomerInfo, IItems, ILocationCoordinates } from "./customerInfo";
 
 export interface IDeliveryInfo {
   customerId: string;
@@ -16,6 +16,7 @@ export interface IClubbedData {
   customerId: string;
   customerName: string;
   phoneNumber: string;
+  location: ILocationCoordinates;
   organization: string;
   deliveryPoint: string;
   deliveryRoute: string;

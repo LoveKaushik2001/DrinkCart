@@ -9,6 +9,10 @@ const customerSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  location: {
+    lat: String,
+    lng: String,
+  },
   deliveredItemsTillDate: {
     gloriousRed: {
       type: Number,

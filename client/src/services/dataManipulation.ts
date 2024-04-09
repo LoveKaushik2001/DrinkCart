@@ -63,6 +63,7 @@ const getMasterData = (
       customerId: delivery.customerId,
       customerName: customerData.customerName,
       phoneNumber: customerData.phoneNumber,
+      location: customerData.location,
       address: customerData.address,
       deliveryStatus: delivery.deliveryStatus,
       deliveryOrder: delivery.deliveryOrder,
