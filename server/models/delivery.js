@@ -23,7 +23,11 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  soup: {
+  shikanji: {
+    type: Number,
+    default: 0,
+  },
+  mint: {
     type: Number,
     default: 0,
   },

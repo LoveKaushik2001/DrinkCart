@@ -9,7 +9,8 @@ export interface IDeliveryInfo {
   gloriousRed: number;
   greenDetox: number;
   salad: number;
-  soup: number;
+  shikanji: number;
+  mint: number;
 }
 
 export interface IClubbedData {

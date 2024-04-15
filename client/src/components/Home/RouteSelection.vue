@@ -12,22 +12,27 @@
         </div>
     </div>
 </template>
+
 <script lang="ts" setup>
 import { defineEmits, defineProps, ref, toRefs } from 'vue';
+
 const emit = defineEmits(['saveRoute', 'closeModal']);
 const props = defineProps<{
     options: string[]
 }>()
 const { options } = toRefs(props);
 const selectedOption = ref(options.value[0]);
+
 const saveRoute = () => {
     emit('saveRoute', selectedOption.value);
     closeModal();
 }
+
 const closeModal = () => {
     emit('closeModal');
 }
 </script>
+
 <style scoped>
 .modal-overlay {
     position: fixed;
@@ -62,5 +67,12 @@ button {
 
 .options-container {
     margin-top: 20px;
+}
+
+.option-label {
+    display: block;
+    /* Display as block element */
+    margin-bottom: 10px;
+    /* Add margin between options */
 }
 </style>
