@@ -26,6 +26,7 @@
                                             <th class="px-4 py-2">Green</th>
                                             <th class="px-4 py-2">Salad</th>
                                             <th class="px-4 py-2">Shikanji</th>
+                                            <th class="px-4 py-2">Mint</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,7 +41,10 @@
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.salad }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.soup }}</td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.shikanji }}
+                                                </td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.mint }}
+                                                </td>
                                             </tr>
                                         </template>
                                     </tbody>
@@ -64,7 +68,8 @@
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
             itemsToBeDelivered.greenDetox }}</p>
                     <p v-if="itemsToBeDelivered.salad">Salad: {{ itemsToBeDelivered.salad }}</p>
-                    <p v-if="itemsToBeDelivered.soup">Shikanji: {{ itemsToBeDelivered.soup }}</p>
+                    <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
+                    <p v-if="itemsToBeDelivered.mint">Green Mint: {{ itemsToBeDelivered.mint }}</p>
                 </div>
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Empty Bottles</label>
@@ -73,7 +78,8 @@
                     <p v-if="itemsToBeCollected.greenDetox">Green: {{
             itemsToBeCollected.greenDetox }}</p>
                     <p v-if="itemsToBeCollected.salad">Salad: {{ itemsToBeCollected.salad }}</p>
-                    <p v-if="itemsToBeCollected.soup">Shikanji: {{ itemsToBeCollected.soup }}</p>
+                    <p v-if="itemsToBeCollected.shikanji">Shikanji: {{ itemsToBeCollected.shikanji }}</p>
+                    <p v-if="itemsToBeCollected.mint">Green Mint: {{ itemsToBeCollected.mint }}</p>
                 </div>
             </div>
             <div v-show="DeliveryStatus.TO_DELIVER === data.deliveryStatus" class="action-buttons">
@@ -108,25 +114,29 @@ const itemsToBeDelivered = ref({
     gloriousRed: 0,
     greenDetox: 0,
     salad: 0,
-    soup: 0
+    shikanji: 0,
+    mint: 0
 } as IItems);
 const itemsToBeCollected = ref({
     gloriousRed: 0,
     greenDetox: 0,
     salad: 0,
-    soup: 0
+    shikanji: 0,
+    mint: 0
 } as IItems);
 const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
         itemsToBeDelivered.value.salad += (customer.itemsToBeDelivered.salad)
-        itemsToBeDelivered.value.soup += (customer.itemsToBeDelivered.soup)
+        itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
+        itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
 
         itemsToBeCollected.value.gloriousRed += customer.itemsToBeCollected.gloriousRed;
         itemsToBeCollected.value.greenDetox += (customer.itemsToBeCollected.greenDetox)
         itemsToBeCollected.value.salad += (customer.itemsToBeCollected.salad)
-        itemsToBeCollected.value.soup += (customer.itemsToBeCollected.soup)
+        itemsToBeCollected.value.shikanji += (customer.itemsToBeCollected.shikanji)
+        itemsToBeCollected.value.mint += (customer.itemsToBeCollected.mint)
     })
 }
 const openModal = () => {

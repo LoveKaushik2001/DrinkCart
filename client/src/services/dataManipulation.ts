@@ -74,13 +74,15 @@ const getMasterData = (
         gloriousRed: delivery.gloriousRed,
         greenDetox: delivery.greenDetox,
         salad: delivery.salad,
-        soup: delivery.soup,
+        shikanji: delivery.shikanji,
+        mint: delivery.mint,
       } as IItems,
       itemsToBeCollected: {
         gloriousRed: customerData.bottlesRemaining.gloriousRed,
         greenDetox: customerData.bottlesRemaining.greenDetox,
         salad: 0,
-        soup: customerData.bottlesRemaining.soup,
+        shikanji: customerData.bottlesRemaining.shikanji,
+        mint: customerData.bottlesRemaining.mint,
       } as IItems,
     } as IClubbedData;
   });
