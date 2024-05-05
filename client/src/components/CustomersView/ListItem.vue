@@ -34,8 +34,12 @@
             masterData.itemsToBeDelivered.gloriousRed }}</p>
                             <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
             masterData.itemsToBeDelivered.greenDetox }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.salad">Salad: {{ masterData.itemsToBeDelivered.salad
-                                }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.sproutSalad">Sprout Salad: {{
+            masterData.itemsToBeDelivered.sproutSalad
+        }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{
+            masterData.itemsToBeDelivered.quinoaSalad
+        }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
             masterData.itemsToBeDelivered.shikanji
         }}

@@ -31,7 +31,11 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  salad: {
+  sproutSalad: {
+    type: Number,
+    default: 0,
+  },
+  quinoaSalad: {
     type: Number,
     default: 0,
   },

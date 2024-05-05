@@ -13,7 +13,8 @@ export interface ICustomerInfo {
 export interface IItems {
   gloriousRed: number;
   greenDetox: number;
-  salad: number;
+  sproutSalad: number;
+  quinoaSalad: number;
   shikanji: number;
   mint: number;
 }
