@@ -39,7 +39,11 @@
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.greenDetox
                                                     }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.salad }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.sproutSalad
+                                                    }}
+                                                </td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.quinoaSalad
+                                                    }}
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.shikanji }}
                                                 </td>
@@ -67,7 +71,8 @@
             itemsToBeDelivered.gloriousRed }}</p>
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
             itemsToBeDelivered.greenDetox }}</p>
-                    <p v-if="itemsToBeDelivered.salad">Salad: {{ itemsToBeDelivered.salad }}</p>
+                    <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
+                    <p v-if="itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{ itemsToBeDelivered.quinoaSalad }}</p>
                     <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
                     <p v-if="itemsToBeDelivered.mint">Green Mint: {{ itemsToBeDelivered.mint }}</p>
                 </div>
@@ -77,7 +82,8 @@
             itemsToBeCollected.gloriousRed }}</p>
                     <p v-if="itemsToBeCollected.greenDetox">Green: {{
             itemsToBeCollected.greenDetox }}</p>
-                    <p v-if="itemsToBeCollected.salad">Salad: {{ itemsToBeCollected.salad }}</p>
+                    <p v-if="itemsToBeCollected.sproutSalad">Sprout Salad: {{ itemsToBeCollected.sproutSalad }}</p>
+                    <p v-if="itemsToBeCollected.quinoaSalad">Quinoa Salad: {{ itemsToBeCollected.quinoaSalad }}</p>
                     <p v-if="itemsToBeCollected.shikanji">Shikanji: {{ itemsToBeCollected.shikanji }}</p>
                     <p v-if="itemsToBeCollected.mint">Green Mint: {{ itemsToBeCollected.mint }}</p>
                 </div>
@@ -113,14 +119,16 @@ const isOpen = ref(false);
 const itemsToBeDelivered = ref({
     gloriousRed: 0,
     greenDetox: 0,
-    salad: 0,
+    sproutSalad: 0,
+    quinoaSalad: 0,
     shikanji: 0,
     mint: 0
 } as IItems);
 const itemsToBeCollected = ref({
     gloriousRed: 0,
     greenDetox: 0,
-    salad: 0,
+    sproutSalad: 0,
+    quinoaSalad: 0,
     shikanji: 0,
     mint: 0
 } as IItems);
@@ -128,13 +136,15 @@ const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
-        itemsToBeDelivered.value.salad += (customer.itemsToBeDelivered.salad)
+        itemsToBeDelivered.value.sproutSalad += (customer.itemsToBeDelivered.sproutSalad)
+        itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
         itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
         itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
 
         itemsToBeCollected.value.gloriousRed += customer.itemsToBeCollected.gloriousRed;
         itemsToBeCollected.value.greenDetox += (customer.itemsToBeCollected.greenDetox)
-        itemsToBeCollected.value.salad += (customer.itemsToBeCollected.salad)
+        itemsToBeCollected.value.sproutSalad += (customer.itemsToBeCollected.sproutSalad)
+        itemsToBeCollected.value.quinoaSalad += (customer.itemsToBeCollected.quinoaSalad)
         itemsToBeCollected.value.shikanji += (customer.itemsToBeCollected.shikanji)
         itemsToBeCollected.value.mint += (customer.itemsToBeCollected.mint)
     })

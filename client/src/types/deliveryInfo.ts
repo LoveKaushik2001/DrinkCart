@@ -8,7 +8,8 @@ export interface IDeliveryInfo {
   deliveryStatus: string;
   gloriousRed: number;
   greenDetox: number;
-  salad: number;
+  sproutSalad: number;
+  quinoaSalad: number;
   shikanji: number;
   mint: number;
 }
