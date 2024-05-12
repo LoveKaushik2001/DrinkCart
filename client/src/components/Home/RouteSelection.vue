@@ -11,7 +11,7 @@
             <button @click="saveRoute">Save</button>
         </div>
         <div v-else class="modal">
-            <div v-if="!routeCountData?.length">No Data found yet</div>
+            <div v-if="!routeCountData?.length">No Data found yet <button @click="closeModal">Close</button></div>
             <div v-else class="options-container">
                 <div class="option-label" v-for="(route, idx) in routeCountData" :key="idx">
                     <div class="dotted-container">
