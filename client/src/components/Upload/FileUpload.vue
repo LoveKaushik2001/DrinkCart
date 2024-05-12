@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import * as XLSX from 'xlsx';
-import { addCustomerInfo, addDeliverySheet } from '../../api/index';
+import { addCustomerInfo, addDeliverySheet, addRouteSheet } from '../../api/index';
 const file = ref<File | null>(null);
 const customerDetail = ref({} as {
     customerId: string,
@@ -38,6 +38,7 @@ const readFile = (event: Event) => {
                         }
                     })
                 })
+                console.log(jsonData.value);
             } catch (error) {
                 console.log('try: ', error);
             }
@@ -56,7 +57,10 @@ const addData = async (isUploaded: boolean) => {
     try {
         if (file.value && file.value?.name.includes('customerInfo')) {
             const result = await addCustomerInfo(dataToBeSaved, isUploaded);
-        } else {
+        } else if (file.value && file.value?.name.includes('route')) {
+            const result = await addRouteSheet(dataToBeSaved);
+        }
+        else {
             const result = await addDeliverySheet(dataToBeSaved);
         }
         file.value = null;
@@ -70,7 +74,8 @@ const addData = async (isUploaded: boolean) => {
 <template>
     <div class="flex items-center justify-center p-12">
         <div class="mx-auto w-full max-w-[550px] bg-white">
-            Note: If you want to add customer data the file name should be "customerInfo". All other files will be stored
+            Note: If you want to add customer data the file name should be "customerInfo". All other files will be
+            stored
             for
             daily delivery count.
             Format of file: csv

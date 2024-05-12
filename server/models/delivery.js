@@ -15,6 +15,10 @@ const deliverySchema = mongoose.Schema({
     type: String,
     default: "To Deliver",
   },
+  timeOfContact: {
+    type: String,
+    default: "",
+  },
   gloriousRed: {
     type: Number,
     default: 0,

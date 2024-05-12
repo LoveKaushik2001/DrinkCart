@@ -27,9 +27,11 @@ export const addDeliverySheet = async (req, res) => {
 
 //update status
 export const updateStatus = async (req, res) => {
+  const dateTime = new Date();
+  const currTime = dateTime.getHours() + " : " + dateTime.getMinutes();
   const { ids, status } = req.body;
   const condition = { customerId: { $in: ids } };
-  const update = { deliveryStatus: status };
+  const update = { deliveryStatus: status, timeOfContact: currTime };
   try {
     const result = await DeliveryInfo.updateMany(condition, update);
     res.status(200).json(result);
