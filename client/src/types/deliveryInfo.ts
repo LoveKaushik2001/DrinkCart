@@ -9,8 +9,10 @@ export interface IDeliveryInfo {
   timeOfContact: string;
   gloriousRed: number;
   greenDetox: number;
-  salad: number;
-  soup: number;
+  sproutSalad: number;
+  quinoaSalad: number;
+  shikanji: number;
+  mint: number;
 }
 
 export interface IClubbedData {

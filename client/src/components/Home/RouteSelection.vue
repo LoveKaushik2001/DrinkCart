@@ -32,6 +32,7 @@
         </div>
     </div>
 </template>
+
 <script lang="ts" setup>
 import { defineEmits, defineProps, onMounted, ref, toRefs } from 'vue';
 import { getAllRouteInfo } from '@/api';
@@ -53,6 +54,7 @@ const saveRoute = () => {
     firstModal.value = false;
     getDataForSelectedRoute();
 }
+
 const closeModal = () => {
     emit('closeModal');
 }
@@ -67,6 +69,7 @@ const getDataForSelectedRoute = async () => {
     console.log(routeCountData.value, routeCountData?.value?.length);
 }
 </script>
+
 <style scoped>
 .modal-overlay {
     position: fixed;
@@ -142,5 +145,12 @@ button {
     /* Add padding */
     border-radius: 5px;
     /* Rounded corners */
+}
+
+.option-label {
+    display: block;
+    /* Display as block element */
+    margin-bottom: 10px;
+    /* Add margin between options */
 }
 </style>

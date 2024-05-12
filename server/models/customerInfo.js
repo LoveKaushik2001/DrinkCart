@@ -22,11 +22,19 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
-    salad: {
+    sproutSalad: {
       type: Number,
       default: 0,
     },
-    soup: {
+    quinoaSalad: {
+      type: Number,
+      default: 0,
+    },
+    shikanji: {
+      type: Number,
+      default: 0,
+    },
+    mint: {
       type: Number,
       default: 0,
     },
@@ -40,11 +48,19 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
-    salad: {
+    sproutSalad: {
       type: Number,
       default: 0,
     },
-    soup: {
+    quinoaSalad: {
+      type: Number,
+      default: 0,
+    },
+    shikanji: {
+      type: Number,
+      default: 0,
+    },
+    mint: {
       type: Number,
       default: 0,
     },

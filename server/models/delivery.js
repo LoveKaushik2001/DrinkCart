@@ -27,11 +27,19 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  soup: {
+  shikanji: {
     type: Number,
     default: 0,
   },
-  salad: {
+  mint: {
+    type: Number,
+    default: 0,
+  },
+  sproutSalad: {
+    type: Number,
+    default: 0,
+  },
+  quinoaSalad: {
     type: Number,
     default: 0,
   },

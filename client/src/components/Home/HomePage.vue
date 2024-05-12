@@ -85,7 +85,7 @@ const changeRoute = async (selectedOption: string) => {
     <RouteSelection v-if="showModal && routePaths?.length" @close-modal="showModal = false" :options="routePaths"
         @save-route="changeRoute" />
     <div class="w-full max-w-md px-2 py-16 sm:px-0">
-        Current Active Route: {{ activeRoutePath }}
+        Current Active Route: <span class="key-heading">{{ activeRoutePath }}</span>
         <TabGroup>
             <TabList class="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
                 <Tab v-for="(status, idx) in deliveryStatus" as="template" :key="idx" v-slot="{ selected }">
@@ -124,5 +124,15 @@ const changeRoute = async (selectedOption: string) => {
 
 .button:hover {
     background-color: #0056b3;
+}
+
+.key-heading {
+    font-size: 20px;
+    margin-top: 15px;
+    background-color: #34D399;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 </style>
