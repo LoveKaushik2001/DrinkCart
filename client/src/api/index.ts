@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  //   baseURL: "http://localhost:3000/",
+  // baseURL: "http://localhost:3000/",
   baseURL: "https://drink-cart-api.vercel.app",
 });
 
@@ -18,3 +18,8 @@ export const addDeliverySheet = (deliverySheet: any) =>
 
 export const updateDeliveryStatus = (ids: string[], status: string) =>
   API.patch(`/drinkcart/updateStatus`, { ids, status });
+
+export const addRouteSheet = (routeSheet: any) =>
+  API.post("/drinkcart/addRouteSheet", routeSheet);
+
+export const getAllRouteInfo = () => API.get("/drinkcart/getAllRouteInfo");
