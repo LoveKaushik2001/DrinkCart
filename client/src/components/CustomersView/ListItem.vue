@@ -16,6 +16,9 @@
             </DisclosureButton>
             <Transition name="fade">
                 <DisclosurePanel class="details-panel" v-show="open">
+                    <div v-if="masterData.timeOfContact">
+                        Time of contact: {{ masterData.timeOfContact }}
+                    </div>
                     <div v-if="masterData?.location?.lat?.trim() && masterData?.location?.lng?.trim()"
                         class="location-cta" @click="openGoogleMaps(masterData.location)">
                         <MapPinIcon class="map-pin-icon" />
@@ -66,7 +69,7 @@ import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid'
-import { defineProps, defineEmits, toRefs } from 'vue';
+import { defineProps, defineEmits, toRefs, ref, computed } from 'vue';
 const props = defineProps<{
     masterData: IClubbedData
 }>();
@@ -79,6 +82,10 @@ const openGoogleMaps = (location: ILocationCoordinates) => {
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
     window.location.href = googleMapsUrl;
 }
+const getCurrentTime = computed(() => {
+    const today = new Date();
+    return today.getHours() + ":" + today.getMinutes();
+})
 </script>
 
 <style scoped>

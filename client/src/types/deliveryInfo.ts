@@ -6,6 +6,7 @@ export interface IDeliveryInfo {
   deliveryRoute: string;
   deliveryOrder: number;
   deliveryStatus: string;
+  timeOfContact: string;
   gloriousRed: number;
   greenDetox: number;
   salad: number;
@@ -23,6 +24,7 @@ export interface IClubbedData {
   address: string;
   deliveryOrder: number;
   deliveryStatus: string;
+  timeOfContact: string;
   itemsToBeDelivered: IItems;
   itemsToBeCollected: IItems;
 }
@@ -32,4 +34,5 @@ export interface IMasterData {
   masterData: IClubbedData[];
   deliveryOrder: number;
   deliveryStatus: string;
+  timeOfContact: string;
 }
