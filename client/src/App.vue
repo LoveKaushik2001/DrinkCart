@@ -5,6 +5,7 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
+    <router-link to="/package">Packaging</router-link> |
     <router-link to="/data">Update Data</router-link>
   </nav>
   <router-view />
