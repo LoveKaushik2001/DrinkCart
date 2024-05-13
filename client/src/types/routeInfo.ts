@@ -1,11 +1,11 @@
 export interface IRouteInfo {
-  address: String;
-  gloriousRed: Number;
-  greenDetox: Number;
-  greenMint: Number;
-  quinoaSalad: Number;
-  shikanji: Number;
-  sproutSalad: Number;
-  route: String;
-  total: Number;
+  address: string;
+  gloriousRed: number;
+  greenDetox: number;
+  greenMint: number;
+  quinoaSalad: number;
+  shikanji: number;
+  sproutSalad: number;
+  route: string;
+  total: number;
 }

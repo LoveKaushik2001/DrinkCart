@@ -55,9 +55,9 @@ const readFile = (event: Event) => {
 const addData = async (isUploaded: boolean) => {
     const dataToBeSaved = isUploaded ? jsonData.value : [customerDetail.value];
     try {
-        if (file.value && file.value?.name.includes('customerInfo')) {
+        if (file.value && file.value?.name?.toLowerCase().includes?.('customerinfo')) {
             const result = await addCustomerInfo(dataToBeSaved, isUploaded);
-        } else if (file.value && file.value?.name.includes('route')) {
+        } else if (file.value && (file.value?.name?.toLowerCase().includes('route') || file.value?.name?.toLowerCase().includes('packag'))) {
             const result = await addRouteSheet(dataToBeSaved);
         }
         else {
