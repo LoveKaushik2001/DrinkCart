@@ -19,6 +19,15 @@ export const addDeliverySheet = (deliverySheet: any) =>
 export const updateDeliveryStatus = (ids: string[], status: string) =>
   API.patch(`/drinkcart/updateStatus`, { ids, status });
 
+export const updateExtraInfo = (id: string, extraData: any) =>
+  API.patch(`/drinkCart/updateExtraInfo`, { id, extraData });
+
+export const initExtraInfo = async (data: any) => {
+  API.post(`/drinkCart/extraInfoInit`, data);
+};
+
+export const getExtraInfo = () => API.get("/drinkcart/getExtraInfo");
+
 export const addRouteSheet = (routeSheet: any) =>
   API.post("/drinkcart/addRouteSheet", routeSheet);
 

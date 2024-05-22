@@ -23,7 +23,6 @@ export const createFinalData = (
         masterData: [data],
         deliveryOrder: data.deliveryOrder,
         deliveryStatus: data.deliveryStatus,
-        timeOfContact: data.timeOfContact,
       });
     } else {
       const organizationExist = finalData.findIndex(
@@ -37,7 +36,6 @@ export const createFinalData = (
           masterData: [data],
           deliveryOrder: data.deliveryOrder,
           deliveryStatus: data.deliveryStatus,
-          timeOfContact: data.timeOfContact,
         });
       }
     }
@@ -63,7 +61,6 @@ const getMasterData = (
     )[0];
     return {
       customerId: delivery.customerId,
-      timeOfContact: delivery.timeOfContact,
       customerName: customerData.customerName,
       phoneNumber: customerData.phoneNumber,
       location: customerData.location,

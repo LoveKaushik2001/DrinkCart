@@ -9,6 +9,11 @@ import {
   updateStatus,
 } from "../controllers/delivery.js";
 import { addRouteSheet, getAllRouteInfo } from "../controllers/routeInfo.js";
+import {
+  initExtraInfo,
+  updateExtraInfo,
+  getExtraInfo,
+} from "../controllers/extraInfo.js";
 const router = express.Router();
 router.get("/getAllCustomers", getAllCustomersInfo);
 router.post("/addCustomer", addCustomerInfo);
@@ -19,4 +24,8 @@ router.patch("/updateStatus", updateStatus);
 
 router.get("/getAllRouteInfo", getAllRouteInfo);
 router.post("/addRouteSheet", addRouteSheet);
+
+router.post("/extraInfoInit", initExtraInfo);
+router.patch("/updateExtraInfo", updateExtraInfo);
+router.get("/getExtraInfo", getExtraInfo);
 export default router;

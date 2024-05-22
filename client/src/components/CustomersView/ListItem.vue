@@ -1,11 +1,10 @@
 <template>
     <div class="delivery-info">
         <Disclosure v-slot="{ open }">
-            <DisclosureButton class="disclosure-button" :class="{ 'open': open }">
+            <DisclosureButton class="disclosure-button" :class="{ open }">
                 <div class="button-content">
                     <div class="address-wrapper">
                         <div class="customer-info">
-                            <!-- Adjusted width to 100% -->
                             <span class="address">{{ masterData.address }}</span>
                         </div>
                     </div>
@@ -16,19 +15,18 @@
             </DisclosureButton>
             <Transition name="fade">
                 <DisclosurePanel class="details-panel" v-show="open">
-                    <div v-if="masterData.timeOfContact">
-                        Time of contact: {{ masterData.timeOfContact }}
-                    </div>
                     <div v-if="masterData?.location?.lat?.trim() && masterData?.location?.lng?.trim()"
                         class="location-cta" @click="openGoogleMaps(masterData.location)">
                         <MapPinIcon class="map-pin-icon" />
                         <span class="cta-text">View Location on Map</span>
                     </div>
-                    <div v-else>Coordinates not provided</div>
+                    <button v-else @click="recordCoordinates()">Coordinates not provided (Click to record)</button>
                     <div class="contact-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
-                        <p><strong>Mobile Number:</strong> <a :href="`tel:${masterData.phoneNumber}`">{{
-            masterData.phoneNumber }}</a></p>
+                        <p>
+                            <strong>Mobile Number:</strong>
+                            <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
+                        </p>
                     </div>
                     <div class="grid-container">
                         <div class="items-to-deliver" style="background-color: aliceblue;">
@@ -38,19 +36,13 @@
                             <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
             masterData.itemsToBeDelivered.greenDetox }}</p>
                             <p v-if="masterData.itemsToBeDelivered.sproutSalad">Sprout Salad: {{
-            masterData.itemsToBeDelivered.sproutSalad
-        }}</p>
+            masterData.itemsToBeDelivered.sproutSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{
-            masterData.itemsToBeDelivered.quinoaSalad
-        }}</p>
+            masterData.itemsToBeDelivered.quinoaSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
-            masterData.itemsToBeDelivered.shikanji
-        }}
-                            </p>
+            masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
-            masterData.itemsToBeDelivered.mint
-        }}
-                            </p>
+            masterData.itemsToBeDelivered.mint }}</p>
                         </div>
                         <div class="items-to-deliver" style="background-color: beige;">
                             <label style="font-style: oblique; color: rgb(140, 109, 0);">Empty Bottles</label>
@@ -59,18 +51,16 @@
                             <p v-if="masterData.itemsToBeCollected.greenDetox">Green: {{
             masterData.itemsToBeCollected.greenDetox }}</p>
                             <p v-if="masterData.itemsToBeCollected.shikanji">Shikanji: {{
-            masterData.itemsToBeCollected.shikanji
-        }}
-                            </p>
+            masterData.itemsToBeCollected.shikanji }}</p>
                             <p v-if="masterData.itemsToBeCollected.mint">Green Mint: {{
-                                masterData.itemsToBeCollected.mint
-                                }}
-                            </p>
+            masterData.itemsToBeCollected.mint }}</p>
                         </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
-                        <button @click="emit('delivered')" :class="['delivered-button']">Delivered</button>
-                        <button @click="emit('notDelivered')" :class="['not-delivered-button']">Not Delivered</button>
+                        <button @click="addTimeStamp('delivered'), emit('delivered')"
+                            class="delivered-button">Delivered</button>
+                        <button @click="addTimeStamp('not-delivered'), emit('notDelivered')"
+                            class="not-delivered-button">Not Delivered</button>
                     </div>
                 </DisclosurePanel>
             </Transition>
@@ -79,43 +69,62 @@
 </template>
 
 <script setup lang="ts">
+import { updateExtraInfo } from '@/api';
 import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
-import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid'
-import { defineProps, defineEmits, toRefs, ref, computed } from 'vue';
-const props = defineProps<{
-    masterData: IClubbedData
-}>();
+import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
+import { defineProps, defineEmits, toRefs } from 'vue';
 
+const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
 const emit = defineEmits(['delivered', 'notDelivered']);
+
 const openGoogleMaps = (location: ILocationCoordinates) => {
-    const lat = location.lat.trim();
-    const lng = location.lng.trim();
+    const lat = String(location.lat).trim();
+    const lng = String(location.lng).trim();
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
     window.location.href = googleMapsUrl;
+};
+
+const recordCoordinates = async () => {
+    const coords = {
+        lat: '',
+        lng: ''
+    }
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        coords.lat = position.coords.latitude.toString();
+        coords.lng = position.coords.longitude.toString();
+        await updateExtraInfo(
+            masterData.value.customerId,
+            {
+                coords: coords,
+                timeStamp: ''
+            }
+        );
+        alert('Coords updated');
+    })
 }
-const getCurrentTime = computed(() => {
-    const today = new Date();
-    return today.getHours() + ":" + today.getMinutes();
-})
+
+const addTimeStamp = async (status: string) => {
+    const time = new Date().toLocaleTimeString().toString();
+    await updateExtraInfo(masterData.value.customerId, { coords: null, timeStamp: time })
+}
 </script>
 
 <style scoped>
 .delivery-info {
     margin-bottom: 10px;
-    /* Adjusted margin */
 }
 
 .disclosure-button {
     width: 100%;
-    background-color: #E5F2E5;
+    background-color: #e5f2e5;
     border-radius: 8px;
     padding: 16px 24px;
     font-size: 18px;
     font-weight: bold;
-    color: #2D635E;
+    color: #2d635e;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,7 +132,7 @@ const getCurrentTime = computed(() => {
 }
 
 .disclosure-button:hover {
-    background-color: #C5E5C6;
+    background-color: #c5e5c6;
 }
 
 .button-content {
@@ -136,9 +145,8 @@ const getCurrentTime = computed(() => {
     flex-grow: 1;
 }
 
-
 .toggle-icon {
-    color: #2D635E;
+    color: #2d635e;
     width: 24px;
     height: 24px;
 }
@@ -153,7 +161,7 @@ const getCurrentTime = computed(() => {
 
 .details-panel {
     padding: 24px;
-    background-color: #F9FAFB;
+    background-color: #f9fafb;
     border-radius: 0 0 8px 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -168,7 +176,6 @@ const getCurrentTime = computed(() => {
 
 .address {
     font-style: italic;
-    /* Adjusted width to 100% */
     width: 100%;
 }
 
@@ -197,7 +204,7 @@ const getCurrentTime = computed(() => {
 }
 
 .delivered-button {
-    background-color: #34D399;
+    background-color: #34d399;
     color: white;
 }
 
@@ -206,7 +213,7 @@ const getCurrentTime = computed(() => {
 }
 
 .not-delivered-button {
-    background-color: #EF4444;
+    background-color: #ef4444;
     color: white;
 }
 
@@ -228,24 +235,20 @@ const getCurrentTime = computed(() => {
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: #2D635E;
+    color: #2d635e;
 }
 
 .location-cta:hover {
     color: #046e47;
-    /* Adjust hover color as needed */
 }
 
 .map-pin-icon {
     width: 20px;
-    /* Adjust icon size as needed */
     height: 20px;
     margin-right: 5px;
-    /* Adjust spacing between icon and text */
 }
 
 .cta-text {
     font-size: 16px;
-    /* Adjust text size as needed */
 }
 </style>
