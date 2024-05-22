@@ -20,7 +20,11 @@
                         <MapPinIcon class="map-pin-icon" />
                         <span class="cta-text">View Location on Map</span>
                     </div>
-                    <button v-else @click="recordCoordinates()">Coordinates not provided (Click to record)</button>
+                    <button v-else @click="recordCoordinates()"
+                        class="flex gap-1 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save
+                        Location
+                        <BookmarkIcon class="map-pin-icon" />
+                    </button>
                     <div class="contact-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
                         <p>
@@ -66,6 +70,9 @@
             </Transition>
         </Disclosure>
     </div>
+    <div v-if="isLoading" class="loader-overlay">
+        <div class="loader"></div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -74,7 +81,8 @@ import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
-import { defineProps, defineEmits, toRefs } from 'vue';
+import { BookmarkIcon } from '@heroicons/vue/24/outline';
+import { defineProps, defineEmits, toRefs, ref } from 'vue';
 
 const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
@@ -86,8 +94,9 @@ const openGoogleMaps = (location: ILocationCoordinates) => {
     const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
     window.location.href = googleMapsUrl;
 };
-
+const isLoading = ref(false);
 const recordCoordinates = async () => {
+    isLoading.value = true;
     const coords = {
         lat: '',
         lng: ''
@@ -102,7 +111,7 @@ const recordCoordinates = async () => {
                 timeStamp: ''
             }
         );
-        alert('Coords updated');
+        isLoading.value = false;
     })
 }
 
@@ -250,5 +259,37 @@ const addTimeStamp = async (status: string) => {
 
 .cta-text {
     font-size: 16px;
+}
+
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>
