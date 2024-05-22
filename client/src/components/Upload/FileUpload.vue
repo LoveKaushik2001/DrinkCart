@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import * as XLSX from 'xlsx';
-import { addCustomerInfo, addDeliverySheet, addRouteSheet } from '../../api/index';
+import { addCustomerInfo, addDeliverySheet, addRouteSheet, initExtraInfo } from '../../api/index';
+import DownloadExtraInfo from './DownloadExtraInfo.vue';
 const file = ref<File | null>(null);
 const customerDetail = ref({} as {
     customerId: string,
@@ -38,7 +39,6 @@ const readFile = (event: Event) => {
                         }
                     })
                 })
-                console.log(jsonData.value);
             } catch (error) {
                 console.log('try: ', error);
             }
@@ -57,6 +57,15 @@ const addData = async (isUploaded: boolean) => {
     try {
         if (file.value && file.value?.name?.toLowerCase().includes?.('customerinfo')) {
             const result = await addCustomerInfo(dataToBeSaved, isUploaded);
+            const initExtraInfoData = [] as any;
+            dataToBeSaved.forEach(data => {
+                initExtraInfoData.push({
+                    customerId: data.customerId,
+                    coords: { lat: '', lng: '' },
+                    timeStamp: ''
+                })
+            })
+            await initExtraInfo(initExtraInfoData);
         } else if (file.value && (file.value?.name?.toLowerCase().includes('route') || file.value?.name?.toLowerCase().includes('packag'))) {
             const result = await addRouteSheet(dataToBeSaved);
         }
@@ -72,6 +81,7 @@ const addData = async (isUploaded: boolean) => {
 }
 </script>
 <template>
+    <DownloadExtraInfo />
     <div class="flex items-center justify-center p-12">
         <div class="mx-auto w-full max-w-[550px] bg-white">
             Note: If you want to add customer data the file name should be "customerInfo". All other files will be

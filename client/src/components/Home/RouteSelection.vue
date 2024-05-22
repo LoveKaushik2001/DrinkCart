@@ -1,6 +1,6 @@
 <template>
     <div class="modal-overlay">
-        <div v-if="firstModal" class="modal">
+        <div class="modal">
             <h2>Select Route</h2>
             <div class="options-container">
                 <label v-for="(option, index) in options" :key="index" class="option-label">
@@ -10,64 +10,22 @@
             </div>
             <button @click="saveRoute">Save</button>
         </div>
-        <div v-else class="modal">
-            <div v-if="!routeCountData?.length">No Data found yet <button @click="closeModal">Close</button></div>
-            <div v-else class="options-container">
-                <div class="option-label" v-for="(route, idx) in routeCountData" :key="idx">
-                    <div class="dotted-container">
-                        <span class="highlighted-address">{{ route.address }}</span>
-                        <div class="vertical-align">
-                            <span v-if="route.gloriousRed">Glorious Red: {{ route.gloriousRed }}</span>
-                            <span v-if="route.greenDetox">Green Detox: {{ route.greenDetox }}</span>
-                            <span v-if="route.greenMint">Green Mint: {{ route.greenMint }}</span>
-                            <span v-if="route.shikanji">Shikanji: {{ route.shikanji }}</span>
-                            <span v-if="route.quinoaSalad">Quinoa Salad: {{ route.quinoaSalad }}</span>
-                            <span v-if="route.sproutSalad">Sprout Salad: {{ route.sproutSalad }}</span>
-                        </div>
-                    </div>
-                </div>
-                ------Ready To Go-------
-                <button @click="closeModal">Close</button>
-            </div>
-        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps, onMounted, ref, toRefs } from 'vue';
-import { getAllRouteInfo } from '@/api';
-import { IRouteInfo } from '../../types';
+import { defineEmits, defineProps, ref, toRefs } from 'vue';
 const emit = defineEmits(['saveRoute', 'closeModal']);
 const props = defineProps<{
     options: string[]
 }>()
 const { options } = toRefs(props);
 const selectedOption = ref(options.value[0]);
-const firstModal = ref(false);
-const routeCountData = ref([] as IRouteInfo[]);
-onMounted(() => {
-    routeCountData.value = [];
-    firstModal.value = true;
-})
 const saveRoute = () => {
     emit('saveRoute', selectedOption.value);
-    firstModal.value = false;
-    getDataForSelectedRoute();
-}
-
-const closeModal = () => {
     emit('closeModal');
 }
 
-const getDataForSelectedRoute = async () => {
-    try {
-        const data = (await getAllRouteInfo()).data as IRouteInfo[];
-        if (data?.length) routeCountData.value = data.filter(d => d.route === selectedOption.value && d.total);
-    } catch (error) {
-        console.log(error);
-    }
-    console.log(routeCountData.value, routeCountData?.value?.length);
-}
 </script>
 
 <style scoped>
