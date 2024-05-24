@@ -26,7 +26,7 @@ export interface IClubbedData {
   deliveryOrder: number;
   deliveryStatus: string;
   itemsToBeDelivered: IItems;
-  itemsToBeCollected: IItems;
+  bottlesToBeCollected: Number;
 }
 
 export interface IMasterData {

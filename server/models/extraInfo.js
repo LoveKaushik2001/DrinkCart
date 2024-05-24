@@ -7,6 +7,14 @@ const extraInfoSchema = mongoose.Schema({
     lat: String,
     lng: String,
   },
+  bottlesCollected: {
+    type: Number,
+    default: 0,
+  },
+  bottlesRemaining: {
+    type: Number,
+    default: 0,
+  },
   hasAnyData: {
     type: Boolean,
     default: false,

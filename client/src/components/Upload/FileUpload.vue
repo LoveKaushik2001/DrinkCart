@@ -62,7 +62,9 @@ const addData = async (isUploaded: boolean) => {
                 initExtraInfoData.push({
                     customerId: data.customerId,
                     coords: { lat: '', lng: '' },
-                    timeStamp: ''
+                    timeStamp: '',
+                    bottlesCollected: 0,
+                    bottlesRemaining: 0
                 })
             })
             await initExtraInfo(initExtraInfoData);

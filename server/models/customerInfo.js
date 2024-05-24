@@ -39,31 +39,9 @@ const customerSchema = mongoose.Schema({
       default: 0,
     },
   },
-  bottlesRemaining: {
-    gloriousRed: {
-      type: Number,
-      default: 0,
-    },
-    greenDetox: {
-      type: Number,
-      default: 0,
-    },
-    sproutSalad: {
-      type: Number,
-      default: 0,
-    },
-    quinoaSalad: {
-      type: Number,
-      default: 0,
-    },
-    shikanji: {
-      type: Number,
-      default: 0,
-    },
-    mint: {
-      type: Number,
-      default: 0,
-    },
+  bottlesToBeCollected: {
+    type: Number,
+    default: 0,
   },
   discountAvailed: {
     type: Number,

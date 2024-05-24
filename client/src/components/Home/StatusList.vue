@@ -29,7 +29,7 @@ const handleDragEnd = () => {
                 <div class="w-full px-4 pt-16">
                     <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
                         <ListItem v-if="!element.organization" :masterData="element.masterData[0]"
-                            @delivered="emit('changeStatus', { id: element.masterData[0].customerId, status: DeliveryStatus.DELIVERED, isOrganization: false })"
+                            @delivered="emit('changeStatus', { id: element.masterData[0].customerId, status: DeliveryStatus.DELIVERED, isOrganization: false, bottlesCollected: $event.bottlesCollected, bottlesRemaining: $event.bottlesRemaining })"
                             @not-delivered="emit('changeStatus', { id: element.masterData[0].customerId, status: DeliveryStatus.NOT_DELIVERED, isOrganization: false })" />
                         <ModalItem v-else :data="element"
                             @delivered="emit('changeStatus', { organization: element.organization, status: DeliveryStatus.DELIVERED, isOrganization: true })"
