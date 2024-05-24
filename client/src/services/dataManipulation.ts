@@ -78,14 +78,7 @@ const getMasterData = (
         shikanji: delivery.shikanji,
         mint: delivery.mint,
       } as IItems,
-      itemsToBeCollected: {
-        gloriousRed: customerData.bottlesRemaining.gloriousRed,
-        greenDetox: customerData.bottlesRemaining.greenDetox,
-        sproutSalad: 0,
-        quinoaSalad: 0,
-        shikanji: customerData.bottlesRemaining.shikanji,
-        mint: customerData.bottlesRemaining.mint,
-      } as IItems,
+      bottlesToBeCollected: customerData.bottlesToBeCollected,
     } as IClubbedData;
   });
 };

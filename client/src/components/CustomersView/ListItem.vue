@@ -48,22 +48,18 @@
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
             masterData.itemsToBeDelivered.mint }}</p>
                         </div>
-                        <div class="items-to-deliver" style="background-color: beige;">
-                            <label style="font-style: oblique; color: rgb(140, 109, 0);">Empty Bottles</label>
-                            <p v-if="masterData.itemsToBeCollected.gloriousRed">Red: {{
-            masterData.itemsToBeCollected.gloriousRed }}</p>
-                            <p v-if="masterData.itemsToBeCollected.greenDetox">Green: {{
-            masterData.itemsToBeCollected.greenDetox }}</p>
-                            <p v-if="masterData.itemsToBeCollected.shikanji">Shikanji: {{
-            masterData.itemsToBeCollected.shikanji }}</p>
-                            <p v-if="masterData.itemsToBeCollected.mint">Green Mint: {{
-            masterData.itemsToBeCollected.mint }}</p>
+                        <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
+                            <div style="font-style: oblique; color: rgb(140, 109, 0);">
+                                Empty Bottles
+                                <span> - {{ masterData.bottlesToBeCollected || 0 }}</span>
+                            </div>
+                            <input v-model="collectedBottles" type="Number">
                         </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
-                        <button @click="addTimeStamp('delivered'), emit('delivered')"
+                        <button @click="addTimeStamp('delivered'), emit('delivered', bottleCollectionData())"
                             class="delivered-button">Delivered</button>
-                        <button @click="addTimeStamp('not-delivered'), emit('notDelivered')"
+                        <button @click="addTimeStamp('not-delivered'), emit('notDelivered', bottleCollectionData())"
                             class="not-delivered-button">Not Delivered</button>
                     </div>
                 </DisclosurePanel>
@@ -82,10 +78,11 @@ import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
 import { BookmarkIcon } from '@heroicons/vue/24/outline';
-import { defineProps, defineEmits, toRefs, ref } from 'vue';
+import { defineProps, defineEmits, toRefs, ref, computed } from 'vue';
 
 const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
+const collectedBottles = ref(0);
 const emit = defineEmits(['delivered', 'notDelivered']);
 
 const openGoogleMaps = (location: ILocationCoordinates) => {
@@ -118,6 +115,18 @@ const recordCoordinates = async () => {
 const addTimeStamp = async (status: string) => {
     const time = new Date().toLocaleTimeString().toString();
     await updateExtraInfo(masterData.value.customerId, { coords: null, timeStamp: time })
+}
+
+const bottleCollectionData = () => {
+    let totalDeliveredBottles = 0;
+    Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
+        if (!key.toLowerCase().includes('salad')) {
+            const obj = masterData.value.itemsToBeDelivered as any;
+            totalDeliveredBottles += Number(obj[key]);
+        }
+    });
+    const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - collectedBottles.value;
+    return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending };
 }
 </script>
 

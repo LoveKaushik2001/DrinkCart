@@ -18,6 +18,25 @@ export const updateExtraInfo = async (req, res) => {
   }
 };
 
+export const updateBottleCollectionCount = async (req, res) => {
+  const { id, extraData } = req.body;
+  const { bottlesCollected, bottlesRemaining } = extraData;
+  const condition = { customerId: id };
+  const update = {
+    bottlesCollected: bottlesCollected,
+    bottlesRemaining: bottlesRemaining,
+    hasAnyData: true,
+  };
+  try {
+    const result = await ExtraInfo.findOneAndUpdate(condition, update, {
+      new: true,
+    });
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
+};
+
 export const initExtraInfo = async (req, res) => {
   const data = req.body;
   try {

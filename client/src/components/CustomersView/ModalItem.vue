@@ -78,14 +78,6 @@
                 </div>
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Empty Bottles</label>
-                    <p v-if="itemsToBeCollected.gloriousRed">Red: {{
-            itemsToBeCollected.gloriousRed }}</p>
-                    <p v-if="itemsToBeCollected.greenDetox">Green: {{
-            itemsToBeCollected.greenDetox }}</p>
-                    <p v-if="itemsToBeCollected.sproutSalad">Sprout Salad: {{ itemsToBeCollected.sproutSalad }}</p>
-                    <p v-if="itemsToBeCollected.quinoaSalad">Quinoa Salad: {{ itemsToBeCollected.quinoaSalad }}</p>
-                    <p v-if="itemsToBeCollected.shikanji">Shikanji: {{ itemsToBeCollected.shikanji }}</p>
-                    <p v-if="itemsToBeCollected.mint">Green Mint: {{ itemsToBeCollected.mint }}</p>
                 </div>
             </div>
             <div v-show="DeliveryStatus.TO_DELIVER === data.deliveryStatus" class="action-buttons">
@@ -124,14 +116,6 @@ const itemsToBeDelivered = ref({
     shikanji: 0,
     mint: 0
 } as IItems);
-const itemsToBeCollected = ref({
-    gloriousRed: 0,
-    greenDetox: 0,
-    sproutSalad: 0,
-    quinoaSalad: 0,
-    shikanji: 0,
-    mint: 0
-} as IItems);
 const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
@@ -140,13 +124,6 @@ const getDeliveryDataToBeDelivered = () => {
         itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
         itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
         itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
-
-        itemsToBeCollected.value.gloriousRed += customer.itemsToBeCollected.gloriousRed;
-        itemsToBeCollected.value.greenDetox += (customer.itemsToBeCollected.greenDetox)
-        itemsToBeCollected.value.sproutSalad += (customer.itemsToBeCollected.sproutSalad)
-        itemsToBeCollected.value.quinoaSalad += (customer.itemsToBeCollected.quinoaSalad)
-        itemsToBeCollected.value.shikanji += (customer.itemsToBeCollected.shikanji)
-        itemsToBeCollected.value.mint += (customer.itemsToBeCollected.mint)
     })
 }
 const openModal = () => {

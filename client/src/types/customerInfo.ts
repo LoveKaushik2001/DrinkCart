@@ -6,7 +6,7 @@ export interface ICustomerInfo {
   organization: string;
   deliveredItemsTillDate: IItems;
   location: ILocationCoordinates;
-  bottlesRemaining: IItems;
+  bottlesToBeCollected: Number;
   discountAvailed: number;
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
-import { getAllCustomersInfo, getAllDeliveriesInfo, updateDeliveryStatus } from '@/api';
+import { getAllCustomersInfo, getAllDeliveriesInfo, updateDeliveryStatus, updateBottleCollectionCount } from '@/api';
 import { ICustomerInfo, IDeliveryInfo, IMasterData } from '@/types';
 import { DeliveryStatus } from '@/constants';
 import { createFinalData } from '@/services';
@@ -65,6 +65,7 @@ const changeStatus = async (event: any) => {
         })
     }
     await updateDeliveryDbs(ids, event.status);
+    await updateBottleCollectionCount(ids[0], { bottlesCollected: event.bottlesCollected, bottlesRemaining: event.bottlesRemaining });
     updateList();
 }
 const updateDeliveryDbs = async (ids: string[], status: string) => {

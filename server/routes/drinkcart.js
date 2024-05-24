@@ -13,6 +13,7 @@ import {
   initExtraInfo,
   updateExtraInfo,
   getExtraInfo,
+  updateBottleCollectionCount,
 } from "../controllers/extraInfo.js";
 const router = express.Router();
 router.get("/getAllCustomers", getAllCustomersInfo);
@@ -27,5 +28,6 @@ router.post("/addRouteSheet", addRouteSheet);
 
 router.post("/extraInfoInit", initExtraInfo);
 router.patch("/updateExtraInfo", updateExtraInfo);
+router.patch("/updateBottleCollectionCount", updateBottleCollectionCount);
 router.get("/getExtraInfo", getExtraInfo);
 export default router;
