@@ -20,9 +20,9 @@
                         <MapPinIcon class="map-pin-icon" />
                         <span class="cta-text">View Location on Map</span>
                     </div>
-                    <button v-else @click="recordCoordinates()"
-                        class="flex gap-1 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save
-                        Location
+                    <button @click="recordCoordinates()"
+                        class="flex gap-1 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        Add Location
                         <BookmarkIcon class="map-pin-icon" />
                     </button>
                     <div class="contact-info">
