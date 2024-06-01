@@ -35,6 +35,10 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  farmSalad: {
+    type: Number,
+    default: 0,
+  },
   quinoaSalad: {
     type: Number,
     default: 0,

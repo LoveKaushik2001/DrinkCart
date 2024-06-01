@@ -30,6 +30,10 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
+    farmSalad: {
+      type: Number,
+      default: 0,
+    },
     shikanji: {
       type: Number,
       default: 0,

@@ -45,6 +45,9 @@
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.quinoaSalad
                                                     }}
                                                 </td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.farmSalad
+                                                    }}
+                                                </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.shikanji }}
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.mint }}
@@ -73,6 +76,7 @@
             itemsToBeDelivered.greenDetox }}</p>
                     <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
                     <p v-if="itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{ itemsToBeDelivered.quinoaSalad }}</p>
+                    <p v-if="itemsToBeDelivered.farmSalad">Farm Salad: {{ itemsToBeDelivered.farmSalad }}</p>
                     <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
                     <p v-if="itemsToBeDelivered.mint">Green Mint: {{ itemsToBeDelivered.mint }}</p>
                 </div>
@@ -113,6 +117,7 @@ const itemsToBeDelivered = ref({
     greenDetox: 0,
     sproutSalad: 0,
     quinoaSalad: 0,
+    farmSalad: 0,
     shikanji: 0,
     mint: 0
 } as IItems);
@@ -122,6 +127,7 @@ const getDeliveryDataToBeDelivered = () => {
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
         itemsToBeDelivered.value.sproutSalad += (customer.itemsToBeDelivered.sproutSalad)
         itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
+        itemsToBeDelivered.value.farmSalad += (customer.itemsToBeDelivered.farmSalad)
         itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
         itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
     })

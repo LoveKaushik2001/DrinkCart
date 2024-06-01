@@ -43,6 +43,8 @@
             masterData.itemsToBeDelivered.sproutSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{
             masterData.itemsToBeDelivered.quinoaSalad }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.farmSalad">Farm Salad: {{
+            masterData.itemsToBeDelivered.farmSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
             masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
