@@ -76,6 +76,7 @@ const getMasterData = (
         sproutSalad: delivery.sproutSalad,
         quinoaSalad: delivery.quinoaSalad,
         shikanji: delivery.shikanji,
+        farmSalad: delivery.farmSalad,
         mint: delivery.mint,
       } as IItems,
       bottlesToBeCollected: customerData.bottlesToBeCollected,

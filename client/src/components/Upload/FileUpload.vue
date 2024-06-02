@@ -61,8 +61,12 @@ const addData = async (isUploaded: boolean) => {
             dataToBeSaved.forEach(data => {
                 initExtraInfoData.push({
                     customerId: data.customerId,
-                    coords: { lat: '', lng: '' },
+                    customerName: data.customerName,
+                    address: data.address,
+                    routeBoy: '',
                     timeStamp: '',
+                    coords: { lat: '', lng: '' },
+                    bottlesDelivered: 0,
                     bottlesCollected: 0,
                     bottlesRemaining: 0
                 })

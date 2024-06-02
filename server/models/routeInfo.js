@@ -8,6 +8,7 @@ const routeSchema = mongoose.Schema({
   quinoaSalad: Number,
   shikanji: Number,
   sproutSalad: Number,
+  farmSalad: Number,
   route: String,
   total: Number,
 });

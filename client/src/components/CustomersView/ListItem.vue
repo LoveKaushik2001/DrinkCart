@@ -43,6 +43,8 @@
             masterData.itemsToBeDelivered.sproutSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{
             masterData.itemsToBeDelivered.quinoaSalad }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.farmSalad">Farm Salad: {{
+            masterData.itemsToBeDelivered.farmSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
             masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
@@ -126,7 +128,7 @@ const bottleCollectionData = () => {
         }
     });
     const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - collectedBottles.value;
-    return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending };
+    return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending, bottlesDelivered: totalDeliveredBottles, routeBoy: masterData.value.deliveryRoute };
 }
 </script>
 

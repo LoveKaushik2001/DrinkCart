@@ -20,11 +20,14 @@ export const updateExtraInfo = async (req, res) => {
 
 export const updateBottleCollectionCount = async (req, res) => {
   const { id, extraData } = req.body;
-  const { bottlesCollected, bottlesRemaining } = extraData;
+  const { bottlesCollected, bottlesRemaining, bottlesDelivered, routeBoy } =
+    extraData;
   const condition = { customerId: id };
   const update = {
     bottlesCollected: bottlesCollected,
     bottlesRemaining: bottlesRemaining,
+    bottlesDelivered: bottlesDelivered,
+    routeBoy: routeBoy,
     hasAnyData: true,
   };
   try {
@@ -40,6 +43,7 @@ export const updateBottleCollectionCount = async (req, res) => {
 export const initExtraInfo = async (req, res) => {
   const data = req.body;
   try {
+    await ExtraInfo.deleteMany();
     const result = await ExtraInfo.insertMany(data);
     res.status(201).json(result);
   } catch (error) {

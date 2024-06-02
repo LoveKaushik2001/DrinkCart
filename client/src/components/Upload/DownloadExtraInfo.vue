@@ -27,7 +27,12 @@ const jsonToCsv = (jsonData: any) => {
                 values.push(pos.lat);
                 values.push(pos.lng);
             } else {
-                values.push(row[key]);
+                const value = row[key];
+                if (typeof value === 'string' && value.includes(',')) {
+                    values.push(`"${value.replace(/"/g, '""')}"`);
+                } else {
+                    values.push(value);
+                }
             }
         })
         csvStr += values.join(',') + '\n';
@@ -53,10 +58,4 @@ const downloadDataAsCsv = async () => {
     const resultWithData = result.filter((res: any) => res.hasAnyData);
     downloadCsv(resultWithData);
 };
-
-const download = async () => {
-    const result = (await getExtraInfo()).data;
-    const resultWithData = result.filter((res: any) => res.hasAnyData);
-    console.log(resultWithData);
-}
 </script>

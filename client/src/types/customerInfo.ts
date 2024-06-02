@@ -15,6 +15,7 @@ export interface IItems {
   greenDetox: number;
   sproutSalad: number;
   quinoaSalad: number;
+  farmSalad: number;
   shikanji: number;
   mint: number;
 }

@@ -65,7 +65,7 @@ const changeStatus = async (event: any) => {
         })
     }
     await updateDeliveryDbs(ids, event.status);
-    await updateBottleCollectionCount(ids[0], { bottlesCollected: event.bottlesCollected, bottlesRemaining: event.bottlesRemaining });
+    await updateBottleCollectionCount(ids[0], { bottlesCollected: event.bottlesCollected, bottlesRemaining: event.bottlesRemaining, bottlesDelivered: event.bottlesDelivered, routeBoy: event.routeBoy });
     updateList();
 }
 const updateDeliveryDbs = async (ids: string[], status: string) => {

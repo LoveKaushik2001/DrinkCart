@@ -6,6 +6,7 @@ export interface IRouteInfo {
   quinoaSalad: number;
   shikanji: number;
   sproutSalad: number;
+  farmSalad: number;
   route: string;
   total: number;
 }
