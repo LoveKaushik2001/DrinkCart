@@ -128,7 +128,7 @@ const bottleCollectionData = () => {
         }
     });
     const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - collectedBottles.value;
-    return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending };
+    return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending, bottlesDelivered: totalDeliveredBottles, routeBoy: masterData.value.deliveryRoute };
 }
 </script>
 
