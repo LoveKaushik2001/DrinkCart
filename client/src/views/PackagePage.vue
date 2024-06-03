@@ -19,7 +19,7 @@
                             <span v-if="route.shikanji">Shikanji - AS: {{ route.shikanji }}</span>
                             <span v-if="route.quinoaSalad">Quinoa Salad - QS: {{ route.quinoaSalad }}</span>
                             <span v-if="route.sproutSalad">Sprout Salad - SS: {{ route.sproutSalad }}</span>
-                            <span v-if="route.sproutSalad">Farm Salad - FS: {{ route.farmSalad }}</span>
+                            <span v-if="route.farmSalad">Farm Salad - FS: {{ route.farmSalad }}</span>
                         </div>
                     </div>
                 </div>
