@@ -15,22 +15,29 @@
             </DisclosureButton>
             <Transition name="fade">
                 <DisclosurePanel class="details-panel" v-show="open">
-                    <div v-if="masterData?.location?.lat?.trim() && masterData?.location?.lng?.trim()"
-                        class="location-cta" @click="openGoogleMaps(masterData.location)">
-                        <MapPinIcon class="map-pin-icon" />
-                        <span class="cta-text">View Location on Map</span>
+                    <div class="flex flex-row gap-4">
+                        <button v-if="masterData?.location?.lat?.trim() && masterData?.location?.lng?.trim()"
+                            @click="openGoogleMaps(masterData.location)"
+                            class="flex items-center gap-1 text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
+                            <MapPinIcon class="map-pin-icon" />
+                            <span class="cta-text">Open Map</span>
+                        </button>
+                        <button @click="recordCoordinates()"
+                            class="flex items-center gap-1 text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-orange-500 dark:hover:bg-orange-600 dark:focus:ring-orange-800">
+                            <BookmarkIcon class="map-pin-icon" />
+                            Add Location
+                        </button>
                     </div>
-                    <button @click="recordCoordinates()"
-                        class="flex gap-1 text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        Add Location
-                        <BookmarkIcon class="map-pin-icon" />
-                    </button>
                     <div class="contact-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
                         <p>
                             <strong>Mobile Number:</strong>
                             <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
                         </p>
+                    </div>
+                    <div v-if="masterData?.note" class="border-dotted border-gray-600 border box-border mb-1">
+                        <strong>Note: </strong>
+                        {{ masterData?.note }}
                     </div>
                     <div class="grid-container">
                         <div class="items-to-deliver" style="background-color: aliceblue;">
@@ -74,13 +81,13 @@
 </template>
 
 <script setup lang="ts">
-import { updateExtraInfo } from '@/api';
+import { getExtraInfo, updateExtraInfo } from '@/api';
 import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
 import { BookmarkIcon } from '@heroicons/vue/24/outline';
-import { defineProps, defineEmits, toRefs, ref, computed } from 'vue';
+import { defineProps, defineEmits, toRefs, ref, computed, watchEffect, onMounted } from 'vue';
 
 const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
