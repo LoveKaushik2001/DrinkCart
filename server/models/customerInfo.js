@@ -51,6 +51,10 @@ const customerSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  note: {
+    type: String,
+    default: "",
+  },
 });
 
 const CustomerInfo = mongoose.model("CustomerInfo", customerSchema);

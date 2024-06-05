@@ -8,6 +8,7 @@ export interface ICustomerInfo {
   location: ILocationCoordinates;
   bottlesToBeCollected: Number;
   discountAvailed: number;
+  note: string;
 }
 
 export interface IItems {
