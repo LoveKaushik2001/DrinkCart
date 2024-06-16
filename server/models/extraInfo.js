@@ -11,8 +11,20 @@ const extraInfoSchema = mongoose.Schema({
     type: String,
     default: "",
   },
+  distanceFromLastPoint: {
+    type: Number,
+    default: 0,
+  },
   timeStamp: String,
   coords: {
+    lat: String,
+    lng: String,
+  },
+  origin: {
+    lat: String,
+    lng: String,
+  },
+  lastPoint: {
     lat: String,
     lng: String,
   },
