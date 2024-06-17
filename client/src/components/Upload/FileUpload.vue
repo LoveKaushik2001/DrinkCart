@@ -65,7 +65,10 @@ const addData = async (isUploaded: boolean) => {
                     address: data.address,
                     routeBoy: '',
                     timeStamp: '',
+                    distanceFromLastPoint: 0,
                     coords: { lat: '', lng: '' },
+                    origin: { lat: '', lng: '' },
+                    lastPoint: { lat: '', lng: '' },
                     bottlesDelivered: 0,
                     bottlesCollected: 0,
                     bottlesRemaining: 0
@@ -80,6 +83,7 @@ const addData = async (isUploaded: boolean) => {
         }
         file.value = null;
         alert('Data Added');
+        localStorage.clear();
     } catch (error) {
         file.value = null;
         alert('Something went wrong try again');

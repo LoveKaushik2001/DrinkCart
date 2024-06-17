@@ -66,9 +66,10 @@
                         </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
-                        <button @click="addTimeStamp('delivered'), emit('delivered', bottleCollectionData())"
+                        <button @click="updateDeliveryStatus('delivered'), emit('delivered', bottleCollectionData())"
                             class="delivered-button">Delivered</button>
-                        <button @click="addTimeStamp('not-delivered'), emit('notDelivered', bottleCollectionData())"
+                        <button
+                            @click="updateDeliveryStatus('not-delivered'), emit('notDelivered', bottleCollectionData())"
                             class="not-delivered-button">Not Delivered</button>
                     </div>
                 </DisclosurePanel>
@@ -81,18 +82,31 @@
 </template>
 
 <script setup lang="ts">
-import { getExtraInfo, updateExtraInfo } from '@/api';
+import { updateExtraInfo } from '@/api';
 import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
 import { BookmarkIcon } from '@heroicons/vue/24/outline';
-import { defineProps, defineEmits, toRefs, ref, computed, watchEffect, onMounted } from 'vue';
-
+import { defineProps, defineEmits, toRefs, ref, onMounted } from 'vue';
+import { calculateDistance } from '@/services';
+const origin = ref(null as any);
+onMounted(async () => {
+    const originPoint = localStorage.getItem('originPoint');
+    if (!originPoint) {
+        await currentCoordinate();
+        origin.value = coords.value;
+        localStorage.setItem('originPoint', `{"lat": ${coords.value.lat}, "lng": ${coords.value.lng}}`);
+    }
+})
 const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
 const collectedBottles = ref(0);
 const emit = defineEmits(['delivered', 'notDelivered']);
+const coords = ref({
+    lat: '',
+    lng: ''
+})
 
 const openGoogleMaps = (location: ILocationCoordinates) => {
     const lat = String(location.lat).trim();
@@ -103,27 +117,44 @@ const openGoogleMaps = (location: ILocationCoordinates) => {
 const isLoading = ref(false);
 const recordCoordinates = async () => {
     isLoading.value = true;
-    const coords = {
-        lat: '',
-        lng: ''
-    }
-    navigator.geolocation.getCurrentPosition(async (position) => {
-        coords.lat = position.coords.latitude.toString();
-        coords.lng = position.coords.longitude.toString();
-        await updateExtraInfo(
-            masterData.value.customerId,
-            {
-                coords: coords,
-                timeStamp: ''
-            }
-        );
-        isLoading.value = false;
+    await currentCoordinate();
+    await updateExtraInfo(
+        masterData.value.customerId,
+        {
+            coords: coords.value,
+            timeStamp: ''
+        }
+    );
+    isLoading.value = false;
+}
+
+const currentCoordinate = async () => {
+    return new Promise<void>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            coords.value.lat = position.coords.latitude.toString();
+            coords.value.lng = position.coords.longitude.toString();
+            resolve();
+        }, (error) => {
+            console.log(error);
+            reject(error);
+        })
     })
 }
 
-const addTimeStamp = async (status: string) => {
+const updateDeliveryStatus = async (status: string) => {
+    await currentCoordinate();
+    origin.value = JSON.parse(localStorage.getItem('originPoint') as string);
+    const lastDeliveryPoint = localStorage.getItem('lastDeliveryPoint');
+    let distance = 0;
+    const p1 = lastDeliveryPoint ? JSON.parse(lastDeliveryPoint) : origin.value;
+    const p2 = coords.value;
+    console.log(p1, p2);
+    console.log(origin.value, coords.value);
+    const value = await calculateDistance(p1, p2);
+    distance = value || 0;
     const time = new Date().toLocaleTimeString().toString();
-    await updateExtraInfo(masterData.value.customerId, { coords: null, timeStamp: time })
+    await updateExtraInfo(masterData.value.customerId, { coords: null, timeStamp: time, distanceFromLastPoint: distance, origin: origin.value, lastPoint: coords.value })
+    localStorage.setItem('lastDeliveryPoint', `{"lat": ${coords.value.lat}, "lng": ${coords.value.lng}}`);
 }
 
 const bottleCollectionData = () => {

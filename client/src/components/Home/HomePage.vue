@@ -4,9 +4,10 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { getAllCustomersInfo, getAllDeliveriesInfo, updateDeliveryStatus, updateBottleCollectionCount } from '@/api';
 import { ICustomerInfo, IDeliveryInfo, IMasterData } from '@/types';
 import { DeliveryStatus } from '@/constants';
-import { createFinalData } from '@/services';
+import { calculateDistance, createFinalData } from '@/services';
 import StatusList from './StatusList.vue';
 import RouteSelection from './RouteSelection.vue';
+import { getExtraInfo } from '@/api';
 const customerData = ref([] as ICustomerInfo[]);
 const deliveryData = ref([] as IDeliveryInfo[]);
 const masterData = ref([] as IMasterData[]);
@@ -20,6 +21,7 @@ const statusList = computed(() => {
 const showModal = ref(true);
 const routePaths = ref([] as string[]);
 const activeRoutePath = ref('');
+const finalDistance = ref(0);
 onMounted(async () => {
     try {
         await getData();
@@ -81,10 +83,51 @@ const changeRoute = async (selectedOption: string) => {
     masterData.value = masterData.value.filter(data => data.masterData[0].deliveryRoute === selectedOption);
     updateList();
 }
+const lastDeliveryTime = ref('00:00:00');
+const bottlesDelivered = ref(0);
+const bottlesCollected = ref(0);
+const lastCoords = ref(null as any);
+const clicked = ref(false);
+const showDistance = async () => {
+    const result = (await getExtraInfo()).data;
+    const resultWithData = result.filter((res: any) => res.hasAnyData);
+    resultWithData.forEach((res: any) => {
+        if (res.routeBoy.toLowerCase() === activeRoutePath.value.toLowerCase()) {
+            finalDistance.value += res.distanceFromLastPoint;
+            bottlesCollected.value += res.bottlesCollected;
+            bottlesDelivered.value += res.bottlesDelivered;
+            if (res.timeStamp > lastDeliveryTime.value) {
+                lastDeliveryTime.value = res.timeStamp;
+                lastCoords.value = res.lastPoint;
+            }
+        }
+    })
+    const lastDist = (await calculateDistance(resultWithData[0].lastPoint, resultWithData[0].origin)) || 0;
+    finalDistance.value += lastDist;
+    clicked.value = true;
+}
 </script>
 <template>
     <RouteSelection v-if="showModal && routePaths?.length" @close-modal="showModal = false" :options="routePaths"
         @save-route="changeRoute" />
+    <button class="rounded-md bg-lime-100 p-2" @click="showDistance">Know your Delivery Info</button>
+    <div v-if="clicked">
+        <p>
+            Distance Traveled: {{ finalDistance }} KM
+        </p>
+        <p>
+            Last Delivered at: {{ lastDeliveryTime }}
+        </p>
+        <p>
+            Bottles Delivered: {{ bottlesDelivered }}
+        </p>
+        <p>
+            Bottles Collected: {{ bottlesCollected }}
+        </p>
+        <p>
+            Last Delivery Coordinates: {{ }}
+        </p>
+    </div>
     <div class="w-full max-w-md px-2 py-16 sm:px-0">
         Current Active Route: <span class="key-heading">{{ activeRoutePath }}</span>
         <TabGroup>

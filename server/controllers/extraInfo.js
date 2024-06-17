@@ -2,13 +2,27 @@ import ExtraInfo from "../models/extraInfo.js";
 
 export const updateExtraInfo = async (req, res) => {
   const { id, extraData } = req.body;
-  const { coords, timeStamp } = extraData;
+  const { coords, timeStamp, distanceFromLastPoint, origin, lastPoint } =
+    extraData;
   const condition = { customerId: id };
   const update =
-    timeStamp?.length && coords
-      ? { coords: coords, timeStamp: timeStamp, hasAnyData: true }
+    timeStamp?.length && coords && distanceFromLastPoint && origin && lastPoint
+      ? {
+          coords: coords,
+          timeStamp: timeStamp,
+          distanceFromLastPoint: distanceFromLastPoint,
+          origin: origin,
+          lastPoint: lastPoint,
+          hasAnyData: true,
+        }
       : timeStamp?.length
-      ? { timeStamp: timeStamp, hasAnyData: true }
+      ? {
+          timeStamp: timeStamp,
+          distanceFromLastPoint: distanceFromLastPoint,
+          origin: origin,
+          lastPoint: lastPoint,
+          hasAnyData: true,
+        }
       : { coords: coords, hasAnyData: true };
   try {
     const result = await ExtraInfo.findOneAndUpdate(condition, update);
