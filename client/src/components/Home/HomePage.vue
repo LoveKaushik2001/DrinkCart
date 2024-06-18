@@ -106,11 +106,21 @@ const showDistance = async () => {
     finalDistance.value += lastDist;
     clicked.value = true;
 }
+const startJourney = computed(() => {
+    return !!localStorage.length;
+})
+const clearLocal = () => {
+    localStorage.removeItem('lastDeliveryPoint');
+}
 </script>
 <template>
     <RouteSelection v-if="showModal && routePaths?.length" @close-modal="showModal = false" :options="routePaths"
         @save-route="changeRoute" />
-    <button class="rounded-md bg-lime-100 p-2" @click="showDistance">Know your Delivery Info</button>
+    <div class="flex flex-col gap-5 max-w-50 items-center justify-center">
+        <button @click="clearLocal()" v-if="startJourney" :class="[' bg-teal-50rounded-md border-2 p-1']">Start
+            Journey</button>
+        <button class="rounded-md bg-lime-100 p-2" @click="showDistance">Know your Delivery Info</button>
+    </div>
     <div v-if="clicked">
         <p>
             Distance Traveled: {{ finalDistance }} KM
