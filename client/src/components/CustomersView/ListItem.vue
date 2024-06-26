@@ -56,6 +56,12 @@
             masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
             masterData.itemsToBeDelivered.mint }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.poha">Poha: {{
+            masterData.itemsToBeDelivered.poha }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.upma">Upma: {{
+            masterData.itemsToBeDelivered.upma }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.thepla">Thepla: {{
+            masterData.itemsToBeDelivered.thepla }}</p>
                         </div>
                         <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
                             <div style="font-style: oblique; color: rgb(140, 109, 0);">

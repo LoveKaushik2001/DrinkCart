@@ -9,6 +9,9 @@ const routeSchema = mongoose.Schema({
   shikanji: Number,
   sproutSalad: Number,
   farmSalad: Number,
+  poha: Number,
+  upma: Number,
+  thepla: Number,
   route: String,
   total: Number,
 });
