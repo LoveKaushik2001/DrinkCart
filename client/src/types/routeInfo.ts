@@ -7,6 +7,9 @@ export interface IRouteInfo {
   shikanji: number;
   sproutSalad: number;
   farmSalad: number;
+  poha: number;
+  upma: number;
+  thepla: number;
   route: string;
   total: number;
 }

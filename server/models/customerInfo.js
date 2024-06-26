@@ -42,6 +42,18 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
+    poha: {
+      type: Number,
+      default: 0,
+    },
+    upma: {
+      type: Number,
+      default: 0,
+    },
+    thepla: {
+      type: Number,
+      default: 0,
+    },
   },
   bottlesToBeCollected: {
     type: Number,
