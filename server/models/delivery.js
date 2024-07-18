@@ -23,6 +23,10 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  roseKatira: {
+    type: Number,
+    default: 0,
+  },
   shikanji: {
     type: Number,
     default: 0,

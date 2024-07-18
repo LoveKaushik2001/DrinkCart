@@ -14,6 +14,7 @@ export interface ICustomerInfo {
 export interface IItems {
   gloriousRed: number;
   greenDetox: number;
+  roseKatira: number;
   sproutSalad: number;
   quinoaSalad: number;
   poha: number;
