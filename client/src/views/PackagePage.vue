@@ -15,6 +15,7 @@
                         <div class="vertical-align">
                             <span v-if="route.gloriousRed">Glorious Red - GR: {{ route.gloriousRed }}</span>
                             <span v-if="route.greenDetox">Green Detox - GD: {{ route.greenDetox }}</span>
+                            <span v-if="route.roseKatira">Rose Katira - RK: {{ route.roseKatira }}</span>
                             <span v-if="route.greenMint">Green Mint - GM: {{ route.greenMint }}</span>
                             <span v-if="route.shikanji">Shikanji - AS: {{ route.shikanji }}</span>
                             <span v-if="route.quinoaSalad">Quinoa Salad - QS: {{ route.quinoaSalad }}</span>

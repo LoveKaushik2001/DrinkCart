@@ -22,6 +22,10 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
+    roseKatira: {
+      type: Number,
+      default: 0,
+    },
     sproutSalad: {
       type: Number,
       default: 0,

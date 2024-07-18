@@ -2,6 +2,7 @@ export interface IRouteInfo {
   address: string;
   gloriousRed: number;
   greenDetox: number;
+  roseKatira: number;
   greenMint: number;
   quinoaSalad: number;
   shikanji: number;

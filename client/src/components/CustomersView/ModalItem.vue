@@ -39,6 +39,9 @@
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.greenDetox
                                                     }}
                                                 </td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.roseKatira
+                                                    }}
+                                                </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.sproutSalad
                                                     }}
                                                 </td>
@@ -80,6 +83,8 @@
             itemsToBeDelivered.gloriousRed }}</p>
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
             itemsToBeDelivered.greenDetox }}</p>
+                    <p v-if="itemsToBeDelivered.roseKatira">Rose Katira: {{
+            itemsToBeDelivered.roseKatira }}</p>
                     <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
                     <p v-if="itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{ itemsToBeDelivered.quinoaSalad }}</p>
                     <p v-if="itemsToBeDelivered.farmSalad">Farm Salad: {{ itemsToBeDelivered.farmSalad }}</p>
@@ -124,6 +129,7 @@ const isOpen = ref(false);
 const itemsToBeDelivered = ref({
     gloriousRed: 0,
     greenDetox: 0,
+    roseKatira: 0,
     sproutSalad: 0,
     quinoaSalad: 0,
     farmSalad: 0,
@@ -137,6 +143,7 @@ const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
+        itemsToBeDelivered.value.roseKatira += (customer.itemsToBeDelivered.roseKatira)
         itemsToBeDelivered.value.sproutSalad += (customer.itemsToBeDelivered.sproutSalad)
         itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
         itemsToBeDelivered.value.farmSalad += (customer.itemsToBeDelivered.farmSalad)

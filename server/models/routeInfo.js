@@ -4,6 +4,7 @@ const routeSchema = mongoose.Schema({
   address: String,
   gloriousRed: Number,
   greenDetox: Number,
+  roseKatira: Number,
   greenMint: Number,
   quinoaSalad: Number,
   shikanji: Number,

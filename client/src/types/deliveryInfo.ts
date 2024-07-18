@@ -8,6 +8,7 @@ export interface IDeliveryInfo {
   deliveryStatus: string;
   gloriousRed: number;
   greenDetox: number;
+  roseKatira: number;
   sproutSalad: number;
   quinoaSalad: number;
   farmSalad: number;

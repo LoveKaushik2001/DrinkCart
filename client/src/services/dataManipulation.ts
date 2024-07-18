@@ -74,6 +74,7 @@ const getMasterData = (
       itemsToBeDelivered: {
         gloriousRed: delivery.gloriousRed,
         greenDetox: delivery.greenDetox,
+        roseKatira: delivery.roseKatira,
         sproutSalad: delivery.sproutSalad,
         quinoaSalad: delivery.quinoaSalad,
         poha: delivery.poha,
