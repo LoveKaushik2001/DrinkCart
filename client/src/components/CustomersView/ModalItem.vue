@@ -55,11 +55,12 @@
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.mint }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.poha }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.pohaMeal }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.upma }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.upmaMeal }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.thepla }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.theplaMeal
+                                                    }}
                                                 </td>
                                             </tr>
                                         </template>
@@ -90,9 +91,9 @@
                     <p v-if="itemsToBeDelivered.farmSalad">Farm Salad: {{ itemsToBeDelivered.farmSalad }}</p>
                     <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
                     <p v-if="itemsToBeDelivered.mint">Green Mint: {{ itemsToBeDelivered.mint }}</p>
-                    <p v-if="itemsToBeDelivered.poha">Poha: {{ itemsToBeDelivered.poha }}</p>
-                    <p v-if="itemsToBeDelivered.upma">Upma: {{ itemsToBeDelivered.upma }}</p>
-                    <p v-if="itemsToBeDelivered.thepla">Thepla: {{ itemsToBeDelivered.thepla }}</p>
+                    <p v-if="itemsToBeDelivered.pohaMeal">Poha: {{ itemsToBeDelivered.pohaMeal }}</p>
+                    <p v-if="itemsToBeDelivered.upmaMeal">Upma: {{ itemsToBeDelivered.upmaMeal }}</p>
+                    <p v-if="itemsToBeDelivered.theplaMeal">Thepla: {{ itemsToBeDelivered.theplaMeal }}</p>
                 </div>
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Empty Bottles</label>
@@ -135,9 +136,9 @@ const itemsToBeDelivered = ref({
     farmSalad: 0,
     shikanji: 0,
     mint: 0,
-    poha: 0,
-    upma: 0,
-    thepla: 0
+    pohaMeal: 0,
+    upmaMeal: 0,
+    theplaMeal: 0
 } as IItems);
 const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
@@ -149,9 +150,9 @@ const getDeliveryDataToBeDelivered = () => {
         itemsToBeDelivered.value.farmSalad += (customer.itemsToBeDelivered.farmSalad)
         itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
         itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
-        itemsToBeDelivered.value.poha += (customer.itemsToBeDelivered.poha)
-        itemsToBeDelivered.value.upma += (customer.itemsToBeDelivered.upma)
-        itemsToBeDelivered.value.thepla += (customer.itemsToBeDelivered.thepla)
+        itemsToBeDelivered.value.pohaMeal += (customer.itemsToBeDelivered.pohaMeal)
+        itemsToBeDelivered.value.upmaMeal += (customer.itemsToBeDelivered.upmaMeal)
+        itemsToBeDelivered.value.theplaMeal += (customer.itemsToBeDelivered.theplaMeal)
     })
 }
 const openModal = () => {

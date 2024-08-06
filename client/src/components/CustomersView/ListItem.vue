@@ -58,12 +58,12 @@
             masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
             masterData.itemsToBeDelivered.mint }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.poha">Poha: {{
-            masterData.itemsToBeDelivered.poha }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.upma">Upma: {{
-            masterData.itemsToBeDelivered.upma }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.thepla">Thepla: {{
-            masterData.itemsToBeDelivered.thepla }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.pohaMeal">Poha: {{
+            masterData.itemsToBeDelivered.pohaMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.upmaMeal">Upma: {{
+            masterData.itemsToBeDelivered.upmaMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.theplaMeal">Thepla: {{
+            masterData.itemsToBeDelivered.theplaMeal }}</p>
                         </div>
                         <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
                             <div style="font-style: oblique; color: rgb(140, 109, 0);">
@@ -168,7 +168,7 @@ const updateDeliveryStatus = async (status: string) => {
 const bottleCollectionData = () => {
     let totalDeliveredBottles = 0;
     Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
-        if (!key.toLowerCase().includes('salad')) {
+        if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('meal')) {
             const obj = masterData.value.itemsToBeDelivered as any;
             totalDeliveredBottles += Number(obj[key]);
         }

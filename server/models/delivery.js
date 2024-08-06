@@ -47,15 +47,15 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  poha: {
+  pohaMeal: {
     type: Number,
     default: 0,
   },
-  upma: {
+  upmaMeal: {
     type: Number,
     default: 0,
   },
-  thepla: {
+  theplaMeal: {
     type: Number,
     default: 0,
   },
