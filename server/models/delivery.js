@@ -59,6 +59,10 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  appeMeal: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const DeliveryInfo = mongoose.model("DeliveryInfo", deliverySchema);

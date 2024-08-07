@@ -13,6 +13,7 @@ const routeSchema = mongoose.Schema({
   pohaMeal: Number,
   upmaMeal: Number,
   theplaMeal: Number,
+  appeMeal: Number,
   route: String,
   total: Number,
 });

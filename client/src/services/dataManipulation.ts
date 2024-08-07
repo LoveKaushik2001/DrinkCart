@@ -80,6 +80,7 @@ const getMasterData = (
         pohaMeal: delivery.pohaMeal,
         upmaMeal: delivery.upmaMeal,
         theplaMeal: delivery.theplaMeal,
+        appeMeal: delivery.appeMeal,
         shikanji: delivery.shikanji,
         farmSalad: delivery.farmSalad,
         mint: delivery.mint,

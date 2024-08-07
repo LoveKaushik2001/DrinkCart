@@ -17,6 +17,7 @@ export interface IDeliveryInfo {
   pohaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
+  appeMeal: number;
 }
 
 export interface IClubbedData {

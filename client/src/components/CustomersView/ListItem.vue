@@ -64,6 +64,8 @@
             masterData.itemsToBeDelivered.upmaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.theplaMeal">Thepla: {{
             masterData.itemsToBeDelivered.theplaMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.appeMeal">Appe: {{
+            masterData.itemsToBeDelivered.appeMeal }}</p>
                         </div>
                         <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
                             <div style="font-style: oblique; color: rgb(140, 109, 0);">

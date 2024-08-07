@@ -11,6 +11,7 @@ export interface IRouteInfo {
   pohaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
+  appeMeal: number;
   route: string;
   total: number;
 }

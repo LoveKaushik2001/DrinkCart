@@ -20,6 +20,7 @@ export interface IItems {
   pohaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
+  appeMeal: number;
   farmSalad: number;
   shikanji: number;
   mint: number;

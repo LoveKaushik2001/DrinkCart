@@ -21,9 +21,10 @@
                             <span v-if="route.quinoaSalad">Quinoa Salad - QS: {{ route.quinoaSalad }}</span>
                             <span v-if="route.sproutSalad">Sprout Salad - SS: {{ route.sproutSalad }}</span>
                             <span v-if="route.farmSalad">Farm Salad - FS: {{ route.farmSalad }}</span>
-                            <span v-if="route.pohaMeal">Poha - PM: {{ route.pohaMeal }}</span>
-                            <span v-if="route.upmaMeal">Upma - UM: {{ route.upmaMeal }}</span>
+                            <span v-if="route.pohaMeal">Poha - pm: {{ route.pohaMeal }}</span>
+                            <span v-if="route.upmaMeal">Upma - um: {{ route.upmaMeal }}</span>
                             <span v-if="route.theplaMeal">Thepla - tm: {{ route.theplaMeal }}</span>
+                            <span v-if="route.appeMeal">Appe - am: {{ route.appeMeal }}</span>
                         </div>
                     </div>
                 </div>
