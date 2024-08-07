@@ -17,9 +17,10 @@ export interface IItems {
   roseKatira: number;
   sproutSalad: number;
   quinoaSalad: number;
-  poha: number;
-  upma: number;
-  thepla: number;
+  pohaMeal: number;
+  upmaMeal: number;
+  theplaMeal: number;
+  appeMeal: number;
   farmSalad: number;
   shikanji: number;
   mint: number;

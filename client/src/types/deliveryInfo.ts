@@ -14,9 +14,10 @@ export interface IDeliveryInfo {
   farmSalad: number;
   shikanji: number;
   mint: number;
-  poha: number;
-  upma: number;
-  thepla: number;
+  pohaMeal: number;
+  upmaMeal: number;
+  theplaMeal: number;
+  appeMeal: number;
 }
 
 export interface IClubbedData {
