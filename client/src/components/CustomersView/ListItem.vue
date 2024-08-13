@@ -72,14 +72,15 @@
                                 Empty Bottles
                                 <span> - {{ masterData.bottlesToBeCollected || 0 }}</span>
                             </div>
-                            <input v-model="collectedBottles" type="Number">
+                            <input v-model="collectedBottles" type="Number" required>
                         </div>
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
-                        <button @click="updateDeliveryStatus('delivered'), emit('delivered', bottleCollectionData())"
+                        <button
+                            @click="updateDeliveryStatus('delivered'), emptyBottlesEntered() ? emit('delivered', bottleCollectionData()) : ''"
                             class="delivered-button">Delivered</button>
                         <button
-                            @click="updateDeliveryStatus('not-delivered'), emit('notDelivered', bottleCollectionData())"
+                            @click="updateDeliveryStatus('not-delivered'), emptyBottlesEntered() ? emit('notDelivered', bottleCollectionData()) : ''"
                             class="not-delivered-button">Not Delivered</button>
                     </div>
                 </DisclosurePanel>
@@ -111,7 +112,7 @@ onMounted(async () => {
 })
 const props = defineProps<{ masterData: IClubbedData }>();
 const { masterData } = toRefs(props);
-const collectedBottles = ref(0);
+const collectedBottles = ref(null);
 const emit = defineEmits(['delivered', 'notDelivered']);
 const coords = ref({
     lat: '',
@@ -151,15 +152,21 @@ const currentCoordinate = async () => {
     })
 }
 
+const emptyBottlesEntered = () => {
+    return !(collectedBottles.value === null || collectedBottles.value === undefined || collectedBottles.value === '')
+}
+
 const updateDeliveryStatus = async (status: string) => {
+    if (collectedBottles.value === null || collectedBottles.value === undefined || collectedBottles.value === '') {
+        alert("Please enter the number of collected bottles.");
+        return;
+    }
     await currentCoordinate();
     origin.value = JSON.parse(localStorage.getItem('originPoint') as string);
     const lastDeliveryPoint = localStorage.getItem('lastDeliveryPoint');
     let distance = 0;
     const p1 = lastDeliveryPoint ? JSON.parse(lastDeliveryPoint) : origin.value;
     const p2 = coords.value;
-    console.log(p1, p2);
-    console.log(origin.value, coords.value);
     const value = await calculateDistance(p1, p2);
     distance = value || 0;
     const time = new Date().toLocaleTimeString().toString();
@@ -175,7 +182,7 @@ const bottleCollectionData = () => {
             totalDeliveredBottles += Number(obj[key]);
         }
     });
-    const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - collectedBottles.value;
+    const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - (collectedBottles.value || 0);
     return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending, bottlesDelivered: totalDeliveredBottles, routeBoy: masterData.value.deliveryRoute };
 }
 </script>
