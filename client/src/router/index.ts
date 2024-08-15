@@ -8,9 +8,14 @@ const routes: Array<RouteRecordRaw> = [
     component: DrinkCart,
   },
   {
-    path: "/package",
-    name: "package",
+    path: "/packageByRoute",
+    name: "packageByRoute",
     component: () => import("../views/PackagePage.vue"),
+  },
+  {
+    path: "/packageByItem",
+    name: "packageByItem",
+    component: () => import("../views/PackagePageItem.vue"),
   },
   {
     path: "/data",

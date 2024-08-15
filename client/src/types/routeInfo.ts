@@ -15,3 +15,9 @@ export interface IRouteInfo {
   route: string;
   total: number;
 }
+
+export interface IItemRouteInfo {
+  address: string;
+  route: string;
+  [key: string]: any;
+}
