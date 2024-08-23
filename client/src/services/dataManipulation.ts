@@ -73,6 +73,7 @@ const getMasterData = (
       note: customerData.note,
       itemsToBeDelivered: {
         gloriousRed: delivery.gloriousRed,
+        papayaPunch: delivery.papayaPunch,
         greenDetox: delivery.greenDetox,
         roseKatira: delivery.roseKatira,
         sproutSalad: delivery.sproutSalad,

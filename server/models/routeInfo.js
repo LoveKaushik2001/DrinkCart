@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const routeSchema = mongoose.Schema({
   address: String,
   gloriousRed: Number,
+  papayaPunch: Number,
   greenDetox: Number,
   roseKatira: Number,
   greenMint: Number,

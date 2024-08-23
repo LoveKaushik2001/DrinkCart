@@ -39,6 +39,9 @@
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.greenDetox
                                                     }}
                                                 </td>
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.papayaPunch
+                                                    }}
+                                                </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.roseKatira
                                                     }}
                                                 </td>
@@ -87,6 +90,8 @@
             itemsToBeDelivered.gloriousRed }}</p>
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
             itemsToBeDelivered.greenDetox }}</p>
+                    <p v-if="itemsToBeDelivered.papayaPunch">Papaya: {{
+            itemsToBeDelivered.papayaPunch }}</p>
                     <p v-if="itemsToBeDelivered.roseKatira">Rose Katira: {{
             itemsToBeDelivered.roseKatira }}</p>
                     <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
@@ -133,6 +138,7 @@ const emit = defineEmits(['delivered', 'notDelivered']);
 const isOpen = ref(false);
 const itemsToBeDelivered = ref({
     gloriousRed: 0,
+    papayaPunch: 0,
     greenDetox: 0,
     roseKatira: 0,
     sproutSalad: 0,
@@ -148,6 +154,7 @@ const itemsToBeDelivered = ref({
 const getDeliveryDataToBeDelivered = () => {
     data.value.masterData.forEach(customer => {
         itemsToBeDelivered.value.gloriousRed += customer.itemsToBeDelivered.gloriousRed;
+        itemsToBeDelivered.value.papayaPunch += customer.itemsToBeDelivered.papayaPunch;
         itemsToBeDelivered.value.greenDetox += (customer.itemsToBeDelivered.greenDetox)
         itemsToBeDelivered.value.roseKatira += (customer.itemsToBeDelivered.roseKatira)
         itemsToBeDelivered.value.sproutSalad += (customer.itemsToBeDelivered.sproutSalad)
