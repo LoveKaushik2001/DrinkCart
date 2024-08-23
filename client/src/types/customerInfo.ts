@@ -13,6 +13,7 @@ export interface ICustomerInfo {
 
 export interface IItems {
   gloriousRed: number;
+  papayaPunch: number;
   greenDetox: number;
   roseKatira: number;
   sproutSalad: number;

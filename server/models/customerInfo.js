@@ -18,6 +18,10 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
+    papayaPunch: {
+      type: Number,
+      default: 0,
+    },
     greenDetox: {
       type: Number,
       default: 0,

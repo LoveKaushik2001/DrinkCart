@@ -14,6 +14,7 @@
                         <span class="highlighted-address">{{ route.address }}</span>
                         <div class="vertical-align">
                             <span v-if="route.gloriousRed">Glorious Red - GR: {{ route.gloriousRed }}</span>
+                            <span v-if="route.papayaPunch">Papaya Punch - PP: {{ route.papayaPunch }}</span>
                             <span v-if="route.greenDetox">Green Detox - GD: {{ route.greenDetox }}</span>
                             <span v-if="route.roseKatira">Rose Katira - RK: {{ route.roseKatira }}</span>
                             <span v-if="route.greenMint">Green Mint - GM: {{ route.greenMint }}</span>
