@@ -25,6 +25,9 @@ export interface IItems {
   farmSalad: number;
   shikanji: number;
   mint: number;
+  sabudanaKhichdi: number;
+  sabudanaCutlet: number;
+  paneerKheer: number;
 }
 
 export interface ILocationCoordinates {

@@ -30,10 +30,15 @@
                     </div>
                     <div class="contact-info">
                         <span class="customer-name">{{ masterData.customerName }}</span>
-                        <p>
-                            <strong>Mobile Number:</strong>
-                            <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
-                        </p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <strong>Mobile Number:</strong>
+                                <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
+                            </div>
+                            <a :href="`https://wa.me/${masterData.phoneNumber}`" target="_blank">
+                                <ChatBubbleOvalLeftEllipsisIcon class="map-pin-icon" />
+                            </a>
+                        </div>
                     </div>
                     <div v-if="masterData?.note" class="border-dotted border-gray-600 border box-border mb-1">
                         <strong>Note: </strong>
@@ -43,31 +48,37 @@
                         <div class="items-to-deliver" style="background-color: aliceblue;">
                             <label style="font-style: oblique; color: rgb(140, 109, 0);">Deliveries</label>
                             <p v-if="masterData.itemsToBeDelivered.gloriousRed">Red: {{
-            masterData.itemsToBeDelivered.gloriousRed }}</p>
+                                masterData.itemsToBeDelivered.gloriousRed }}</p>
                             <p v-if="masterData.itemsToBeDelivered.greenDetox">Green: {{
-            masterData.itemsToBeDelivered.greenDetox }}</p>
+                                masterData.itemsToBeDelivered.greenDetox }}</p>
                             <p v-if="masterData.itemsToBeDelivered.papayaPunch">Papaya: {{
-            masterData.itemsToBeDelivered.papayaPunch }}</p>
+                                masterData.itemsToBeDelivered.papayaPunch }}</p>
                             <p v-if="masterData.itemsToBeDelivered.roseKatira">Rose Katira: {{
-            masterData.itemsToBeDelivered.roseKatira }}</p>
+                                masterData.itemsToBeDelivered.roseKatira }}</p>
                             <p v-if="masterData.itemsToBeDelivered.sproutSalad">Sprout Salad: {{
-            masterData.itemsToBeDelivered.sproutSalad }}</p>
+                                masterData.itemsToBeDelivered.sproutSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{
-            masterData.itemsToBeDelivered.quinoaSalad }}</p>
+                                masterData.itemsToBeDelivered.quinoaSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.farmSalad">Farm Salad: {{
-            masterData.itemsToBeDelivered.farmSalad }}</p>
+                                masterData.itemsToBeDelivered.farmSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
-            masterData.itemsToBeDelivered.shikanji }}</p>
+                                masterData.itemsToBeDelivered.shikanji }}</p>
                             <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
-            masterData.itemsToBeDelivered.mint }}</p>
+                                masterData.itemsToBeDelivered.mint }}</p>
                             <p v-if="masterData.itemsToBeDelivered.pohaMeal">Poha: {{
-            masterData.itemsToBeDelivered.pohaMeal }}</p>
+                                masterData.itemsToBeDelivered.pohaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.upmaMeal">Upma: {{
-            masterData.itemsToBeDelivered.upmaMeal }}</p>
+                                masterData.itemsToBeDelivered.upmaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.theplaMeal">Thepla: {{
-            masterData.itemsToBeDelivered.theplaMeal }}</p>
+                                masterData.itemsToBeDelivered.theplaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.appeMeal">Appe: {{
-            masterData.itemsToBeDelivered.appeMeal }}</p>
+                                masterData.itemsToBeDelivered.appeMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.sabudanaKhichdi">Sabudana Khichdi: {{
+                                masterData.itemsToBeDelivered.sabudanaKhichdi }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.sabudanaCutlet">Sabudana Cutlet: {{
+                                masterData.itemsToBeDelivered.sabudanaCutlet }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.paneerKheer">Paneer Kheer: {{
+                                masterData.itemsToBeDelivered.paneerKheer }}</p>
                         </div>
                         <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
                             <div style="font-style: oblique; color: rgb(140, 109, 0);">
@@ -100,7 +111,7 @@ import { DeliveryStatus } from '@/constants';
 import { IClubbedData, ILocationCoordinates } from '@/types';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
 import { ChevronDownIcon, MapPinIcon } from '@heroicons/vue/20/solid';
-import { BookmarkIcon } from '@heroicons/vue/24/outline';
+import { BookmarkIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/24/outline';
 import { defineProps, defineEmits, toRefs, ref, onMounted } from 'vue';
 import { calculateDistance } from '@/services';
 const origin = ref(null as any);
@@ -179,7 +190,7 @@ const updateDeliveryStatus = async (status: string) => {
 const bottleCollectionData = () => {
     let totalDeliveredBottles = 0;
     Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
-        if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('meal')) {
+        if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('sabudana') && !key.toLowerCase().includes('kheer') && !key.toLowerCase().includes('meal')) {
             const obj = masterData.value.itemsToBeDelivered as any;
             totalDeliveredBottles += Number(obj[key]);
         }
