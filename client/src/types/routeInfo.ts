@@ -13,6 +13,9 @@ export interface IRouteInfo {
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
+  sabudanaKhichdi: number;
+  sabudanaCutlet: number;
+  paneerKheer: number;
   route: string;
   total: number;
 }

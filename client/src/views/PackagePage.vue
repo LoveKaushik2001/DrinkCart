@@ -26,6 +26,9 @@
                             <span v-if="route.upmaMeal">Upma - um: {{ route.upmaMeal }}</span>
                             <span v-if="route.theplaMeal">Thepla - tm: {{ route.theplaMeal }}</span>
                             <span v-if="route.appeMeal">Appe - am: {{ route.appeMeal }}</span>
+                            <span v-if="route.sabudanaKhichdi">Sabudana Khichdi - sk: {{ route.sabudanaKhichdi }}</span>
+                            <span v-if="route.sabudanaCutlet">Sabudana Cutlet - sc: {{ route.sabudanaCutlet }}</span>
+                            <span v-if="route.paneerKheer">Paneer Kheer - pk: {{ route.paneerKheer }}</span>
                         </div>
                     </div>
                 </div>

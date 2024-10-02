@@ -19,6 +19,9 @@ export interface IDeliveryInfo {
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
+  sabudanaKhichdi: number;
+  sabudanaCutlet: number;
+  paneerKheer: number;
 }
 
 export interface IClubbedData {

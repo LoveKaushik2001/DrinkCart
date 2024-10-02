@@ -67,6 +67,18 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  sabudanaKhichdi: {
+    type: Number,
+    default: 0,
+  },
+  sabudanaCutlet: {
+    type: Number,
+    default: 0,
+  },
+  paneerKheer: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const DeliveryInfo = mongoose.model("DeliveryInfo", deliverySchema);
