@@ -35,7 +35,7 @@
                                 <strong>Mobile Number:</strong>
                                 <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
                             </div>
-                            <a :href="`https://wa.me/${masterData.phoneNumber}`" target="_blank">
+                            <a :href="`https://wa.me/+91${masterData.phoneNumber.slice(-10)}`" target="_blank">
                                 <ChatBubbleOvalLeftEllipsisIcon class="map-pin-icon" />
                             </a>
                         </div>
