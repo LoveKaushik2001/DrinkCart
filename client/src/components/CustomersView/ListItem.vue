@@ -35,7 +35,7 @@
                                 <strong>Mobile Number:</strong>
                                 <a :href="`tel:${masterData.phoneNumber}`">{{ masterData.phoneNumber }}</a>
                             </div>
-                            <a :href="`https://wa.me/+91${masterData.phoneNumber.slice(-10)}`" target="_blank">
+                            <a :href="`https://wa.me/+91${formatMobileNumber(masterData.phoneNumber)}`" target="_blank">
                                 <ChatBubbleOvalLeftEllipsisIcon class="map-pin-icon" />
                             </a>
                         </div>
@@ -131,6 +131,12 @@ const coords = ref({
     lat: '',
     lng: ''
 })
+
+const formatMobileNumber = (number: string) => {
+    const nums = number.split(" ");
+    const finalNum = nums.filter(num => num.trim()?.length).join("");
+    return finalNum.slice(-10);
+}
 
 const openGoogleMaps = (location: ILocationCoordinates) => {
     const lat = String(location.lat).trim();
