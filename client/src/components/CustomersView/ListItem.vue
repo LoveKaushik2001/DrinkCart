@@ -1,7 +1,8 @@
 <template>
     <div class="delivery-info">
         <Disclosure v-slot="{ open }">
-            <DisclosureButton class="disclosure-button" :class="{ open }">
+            <DisclosureButton class="disclosure-button" :style="deliveryToMake ? '' : 'background-color:#e48c6b'"
+                :class="{ open }">
                 <div class="button-content">
                     <div class="address-wrapper">
                         <div class="customer-info">
@@ -90,10 +91,10 @@
                     </div>
                     <div v-show="DeliveryStatus.TO_DELIVER === masterData.deliveryStatus" class="action-buttons">
                         <button
-                            @click="updateDeliveryStatus('delivered'), emptyBottlesEntered() ? emit('delivered', bottleCollectionData()) : ''"
+                            @click="updateDeliveryStatus('delivered'), emptyBottlesEntered() ? emit('delivered', bottleCollectionData('delivered')) : ''"
                             class="delivered-button">Delivered</button>
                         <button
-                            @click="updateDeliveryStatus('not-delivered'), emptyBottlesEntered() ? emit('notDelivered', bottleCollectionData()) : ''"
+                            @click="updateDeliveryStatus('not-delivered'), emptyBottlesEntered() ? emit('notDelivered', bottleCollectionData('notDelivered')) : ''"
                             class="not-delivered-button">Not Delivered</button>
                     </div>
                 </DisclosurePanel>
@@ -123,8 +124,8 @@ onMounted(async () => {
         localStorage.setItem('originPoint', `{"lat": ${coords.value.lat}, "lng": ${coords.value.lng}}`);
     }
 })
-const props = defineProps<{ masterData: IClubbedData }>();
-const { masterData } = toRefs(props);
+const props = defineProps<{ masterData: IClubbedData, deliveryToMake: boolean }>();
+const { masterData, deliveryToMake } = toRefs(props);
 const collectedBottles = ref(null);
 const emit = defineEmits(['delivered', 'notDelivered']);
 const coords = ref({
@@ -193,14 +194,16 @@ const updateDeliveryStatus = async (status: string) => {
     localStorage.setItem('lastDeliveryPoint', `{"lat": ${coords.value.lat}, "lng": ${coords.value.lng}}`);
 }
 
-const bottleCollectionData = () => {
+const bottleCollectionData = (status: string) => {
     let totalDeliveredBottles = 0;
-    Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
-        if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('sabudana') && !key.toLowerCase().includes('kheer') && !key.toLowerCase().includes('meal')) {
-            const obj = masterData.value.itemsToBeDelivered as any;
-            totalDeliveredBottles += Number(obj[key]);
-        }
-    });
+    if (status === 'delivered') {
+        Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
+            if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('sabudana') && !key.toLowerCase().includes('kheer') && !key.toLowerCase().includes('meal')) {
+                const obj = masterData.value.itemsToBeDelivered as any;
+                totalDeliveredBottles += Number(obj[key]);
+            }
+        });
+    }
     const todaysPending = totalDeliveredBottles + (+masterData.value.bottlesToBeCollected || 0) - (collectedBottles.value || 0);
     return { bottlesCollected: collectedBottles.value, bottlesRemaining: todaysPending, bottlesDelivered: totalDeliveredBottles, routeBoy: masterData.value.deliveryRoute };
 }

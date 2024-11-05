@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { IMasterData } from '@/types';
-import { defineProps, onMounted, toRefs, ref, defineEmits } from 'vue';
+import { IClubbedData, IItems, IMasterData } from '@/types';
+import { defineProps, onMounted, toRefs, ref, defineEmits, computed } from 'vue';
 import draggable from 'vuedraggable';
 import ListItem from '../CustomersView/ListItem.vue';
 import ModalItem from '../CustomersView/ModalItem.vue';
@@ -20,6 +20,9 @@ const handleDragEnd = () => {
         return item;
     });
 }
+const deliveryToMake = (data: IItems) => {
+    return !!Object.values(data).filter(item => item)?.length;
+}
 </script>
 <template>
     <div>
@@ -29,6 +32,7 @@ const handleDragEnd = () => {
                 <div class="w-full px-4 pt-16">
                     <div class="mx-auto w-full max-w-md rounded-2xl bg-white p-2">
                         <ListItem v-if="!element.organization" :masterData="element.masterData[0]"
+                            :deliveryToMake="deliveryToMake(element.masterData[0].itemsToBeDelivered)"
                             @delivered="emit('changeStatus', { id: element.masterData[0].customerId, status: DeliveryStatus.DELIVERED, isOrganization: false, bottlesCollected: $event.bottlesCollected, bottlesRemaining: $event.bottlesRemaining, bottlesDelivered: $event.bottlesDelivered, routeBoy: $event.routeBoy })"
                             @not-delivered="emit('changeStatus', { id: element.masterData[0].customerId, status: DeliveryStatus.NOT_DELIVERED, isOrganization: false, bottlesCollected: $event.bottlesCollected, bottlesRemaining: $event.bottlesRemaining, bottlesDelivered: $event.bottlesDelivered, routeBoy: $event.routeBoy })" />
                         <ModalItem v-else :data="element"
