@@ -78,7 +78,7 @@ const getMasterData = (
         roseKatira: delivery.roseKatira,
         sproutSalad: delivery.sproutSalad,
         quinoaSalad: delivery.quinoaSalad,
-        pohaMeal: delivery.pohaMeal,
+        dhoklaMeal: delivery.dhoklaMeal,
         upmaMeal: delivery.upmaMeal,
         theplaMeal: delivery.theplaMeal,
         appeMeal: delivery.appeMeal,
@@ -87,7 +87,7 @@ const getMasterData = (
         sabudanaKhichdi: delivery.sabudanaKhichdi,
         sabudanaCutlet: delivery.sabudanaCutlet,
         paneerKheer: delivery.paneerKheer,
-        mint: delivery.mint,
+        kokam: delivery.kokam,
       } as IItems,
       bottlesToBeCollected: customerData.bottlesToBeCollected,
     } as IClubbedData;

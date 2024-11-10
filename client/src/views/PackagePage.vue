@@ -17,12 +17,12 @@
                             <span v-if="route.papayaPunch">Papaya Punch - PP: {{ route.papayaPunch }}</span>
                             <span v-if="route.greenDetox">Green Detox - GD: {{ route.greenDetox }}</span>
                             <span v-if="route.roseKatira">Rose Katira - RK: {{ route.roseKatira }}</span>
-                            <span v-if="route.greenMint">Green Mint - GM: {{ route.greenMint }}</span>
+                            <span v-if="route.kokam">Kokam Sharbat - KS: {{ route.kokam }}</span>
                             <span v-if="route.shikanji">Shikanji - AS: {{ route.shikanji }}</span>
                             <span v-if="route.quinoaSalad">Quinoa Salad - QS: {{ route.quinoaSalad }}</span>
                             <span v-if="route.sproutSalad">Sprout Salad - SS: {{ route.sproutSalad }}</span>
                             <span v-if="route.farmSalad">Farm Salad - FS: {{ route.farmSalad }}</span>
-                            <span v-if="route.pohaMeal">Poha - pm: {{ route.pohaMeal }}</span>
+                            <span v-if="route.dhoklaMeal">Dhokla - dm: {{ route.dhoklaMeal }}</span>
                             <span v-if="route.upmaMeal">Upma - um: {{ route.upmaMeal }}</span>
                             <span v-if="route.theplaMeal">Thepla - tm: {{ route.theplaMeal }}</span>
                             <span v-if="route.appeMeal">Appe - am: {{ route.appeMeal }}</span>

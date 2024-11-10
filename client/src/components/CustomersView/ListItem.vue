@@ -64,10 +64,10 @@
                                 masterData.itemsToBeDelivered.farmSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
                                 masterData.itemsToBeDelivered.shikanji }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.mint">Green Mint: {{
-                                masterData.itemsToBeDelivered.mint }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.pohaMeal">Poha: {{
-                                masterData.itemsToBeDelivered.pohaMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.kokam">Kokam Sharbat: {{
+                                masterData.itemsToBeDelivered.kokam }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.dhoklaMeal">Dhokla: {{
+                                masterData.itemsToBeDelivered.dhoklaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.upmaMeal">Upma: {{
                                 masterData.itemsToBeDelivered.upmaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.theplaMeal">Thepla: {{

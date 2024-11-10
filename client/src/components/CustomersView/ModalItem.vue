@@ -16,8 +16,8 @@
                             </button>
                             <div class="modal-body text-gray-900">
                                 <h2 class="text-xl font-bold mb-4 text-center">All Customers Data for {{
-            data.organization
-        }}</h2>
+                                    data.organization
+                                }}</h2>
                                 <table class="w-full">
                                     <thead>
                                         <tr>
@@ -26,7 +26,7 @@
                                             <th class="px-4 py-2">Green</th>
                                             <th class="px-4 py-2">Salad</th>
                                             <th class="px-4 py-2">Shikanji</th>
-                                            <th class="px-4 py-2">Mint</th>
+                                            <th class="px-4 py-2">kokam</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,9 +56,10 @@
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.shikanji }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.mint }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.kokam }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.pohaMeal }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.dhoklaMeal
+                                                    }}
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.upmaMeal }}
                                                 </td>
@@ -87,19 +88,19 @@
                 <div class="items-to-deliver">
                     <label style="font-style: oblique;">Deliveries</label>
                     <p v-if="itemsToBeDelivered.gloriousRed">Red: {{
-            itemsToBeDelivered.gloriousRed }}</p>
+                        itemsToBeDelivered.gloriousRed }}</p>
                     <p v-if="itemsToBeDelivered.greenDetox">Green: {{
-            itemsToBeDelivered.greenDetox }}</p>
+                        itemsToBeDelivered.greenDetox }}</p>
                     <p v-if="itemsToBeDelivered.papayaPunch">Papaya: {{
-            itemsToBeDelivered.papayaPunch }}</p>
+                        itemsToBeDelivered.papayaPunch }}</p>
                     <p v-if="itemsToBeDelivered.roseKatira">Rose Katira: {{
-            itemsToBeDelivered.roseKatira }}</p>
+                        itemsToBeDelivered.roseKatira }}</p>
                     <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
                     <p v-if="itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{ itemsToBeDelivered.quinoaSalad }}</p>
                     <p v-if="itemsToBeDelivered.farmSalad">Farm Salad: {{ itemsToBeDelivered.farmSalad }}</p>
                     <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
-                    <p v-if="itemsToBeDelivered.mint">Green Mint: {{ itemsToBeDelivered.mint }}</p>
-                    <p v-if="itemsToBeDelivered.pohaMeal">Poha: {{ itemsToBeDelivered.pohaMeal }}</p>
+                    <p v-if="itemsToBeDelivered.kokam">Kokam Sharbat: {{ itemsToBeDelivered.kokam }}</p>
+                    <p v-if="itemsToBeDelivered.dhoklaMeal">Dhokla: {{ itemsToBeDelivered.dhoklaMeal }}</p>
                     <p v-if="itemsToBeDelivered.upmaMeal">Upma: {{ itemsToBeDelivered.upmaMeal }}</p>
                     <p v-if="itemsToBeDelivered.theplaMeal">Thepla: {{ itemsToBeDelivered.theplaMeal }}</p>
                     <p v-if="itemsToBeDelivered.appeMeal">Appe: {{ itemsToBeDelivered.appeMeal }}</p>
@@ -145,8 +146,8 @@ const itemsToBeDelivered = ref({
     quinoaSalad: 0,
     farmSalad: 0,
     shikanji: 0,
-    mint: 0,
-    pohaMeal: 0,
+    kokam: 0,
+    dhoklaMeal: 0,
     upmaMeal: 0,
     theplaMeal: 0,
     appeMeal: 0
@@ -161,8 +162,8 @@ const getDeliveryDataToBeDelivered = () => {
         itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
         itemsToBeDelivered.value.farmSalad += (customer.itemsToBeDelivered.farmSalad)
         itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
-        itemsToBeDelivered.value.mint += (customer.itemsToBeDelivered.mint)
-        itemsToBeDelivered.value.pohaMeal += (customer.itemsToBeDelivered.pohaMeal)
+        itemsToBeDelivered.value.kokam += (customer.itemsToBeDelivered.kokam)
+        itemsToBeDelivered.value.dhoklaMeal += (customer.itemsToBeDelivered.dhoklaMeal)
         itemsToBeDelivered.value.upmaMeal += (customer.itemsToBeDelivered.upmaMeal)
         itemsToBeDelivered.value.theplaMeal += (customer.itemsToBeDelivered.theplaMeal)
         itemsToBeDelivered.value.appeMeal += (customer.itemsToBeDelivered.appeMeal)

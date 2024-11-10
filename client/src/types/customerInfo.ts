@@ -18,13 +18,13 @@ export interface IItems {
   roseKatira: number;
   sproutSalad: number;
   quinoaSalad: number;
-  pohaMeal: number;
+  dhoklaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
   farmSalad: number;
   shikanji: number;
-  mint: number;
+  kokam: number;
   sabudanaKhichdi: number;
   sabudanaCutlet: number;
   paneerKheer: number;

@@ -4,12 +4,12 @@ export interface IRouteInfo {
   papayaPunch: number;
   greenDetox: number;
   roseKatira: number;
-  greenMint: number;
+  kokam: number;
   quinoaSalad: number;
   shikanji: number;
   sproutSalad: number;
   farmSalad: number;
-  pohaMeal: number;
+  dhoklaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
