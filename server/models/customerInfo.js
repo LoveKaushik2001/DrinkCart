@@ -46,11 +46,11 @@ const customerSchema = mongoose.Schema({
       type: Number,
       default: 0,
     },
-    mint: {
+    kokam: {
       type: Number,
       default: 0,
     },
-    pohaMeal: {
+    dhoklaMeal: {
       type: Number,
       default: 0,
     },

@@ -14,8 +14,8 @@ export interface IDeliveryInfo {
   quinoaSalad: number;
   farmSalad: number;
   shikanji: number;
-  mint: number;
-  pohaMeal: number;
+  kokam: number;
+  dhoklaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
