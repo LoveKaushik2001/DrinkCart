@@ -15,6 +15,7 @@ import {
   getExtraInfo,
   updateBottleCollectionCount,
 } from "../controllers/extraInfo.js";
+import { setSaleInfo, getSalesInfo } from "../controllers/sales.js";
 const router = express.Router();
 router.get("/getAllCustomers", getAllCustomersInfo);
 router.post("/addCustomer", addCustomerInfo);
@@ -30,4 +31,7 @@ router.post("/extraInfoInit", initExtraInfo);
 router.patch("/updateExtraInfo", updateExtraInfo);
 router.patch("/updateBottleCollectionCount", updateBottleCollectionCount);
 router.get("/getExtraInfo", getExtraInfo);
+
+router.post("/setSaleInfo", setSaleInfo);
+router.get("/getSalesInfo", getSalesInfo);
 export default router;
