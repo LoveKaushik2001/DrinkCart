@@ -22,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "data",
     component: () => import("../views/DataManager.vue"),
   },
+  {
+    path: "/sales",
+    name: "sales",
+    component: () => import("../views/SaleView.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -35,3 +35,7 @@ export const addRouteSheet = (routeSheet: any) =>
   API.post("/drinkcart/addRouteSheet", routeSheet);
 
 export const getAllRouteInfo = () => API.get("/drinkcart/getAllRouteInfo");
+
+export const setSaleInfo = (formData: any) =>
+  API.post("/drinkcart/setSaleInfo", formData);
+export const getSalesInfo = () => API.get("/drinkcart/getSalesInfo");
