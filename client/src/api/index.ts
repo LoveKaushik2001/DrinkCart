@@ -38,4 +38,6 @@ export const getAllRouteInfo = () => API.get("/drinkcart/getAllRouteInfo");
 
 export const setSaleInfo = (formData: any) =>
   API.post("/drinkcart/setSaleInfo", formData);
+export const deleteSaleInfo = (id: string) =>
+  API.delete(`/drinkcart/deleteSaleInfo/${id}`);
 export const getSalesInfo = () => API.get("/drinkcart/getSalesInfo");
