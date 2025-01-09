@@ -12,7 +12,17 @@ const saleSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
-    name: {
+    shopName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    ownerName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phone: {
       type: String,
       required: true,
       trim: true,
@@ -25,7 +35,6 @@ const saleSchema = mongoose.Schema(
     chocolates: {
       type: Number,
       required: true,
-      min: [1, "Number of chocolates must be greater than or equal to 1"],
     },
     picture: {
       type: String,

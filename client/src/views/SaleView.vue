@@ -6,14 +6,33 @@
             <!-- Name -->
             <div class="form-group">
                 <label for="salesPersonName">SalesPerson Name:</label>
-                <input type="text" id="name" v-model="form.salesPersonName"
+                <input type="text" id="salesPersonName" v-model="form.salesPersonName"
                     :class="{ 'is-invalid': errors.salesPersonName }" required />
                 <span v-if="errors.salesPersonName" class="error">{{ errors.salesPersonName }}</span>
             </div>
+
+            <!-- Shop Name -->
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" v-model="form.name" :class="{ 'is-invalid': errors.name }" required />
-                <span v-if="errors.name" class="error">{{ errors.name }}</span>
+                <label for="shopName">Shop Name:</label>
+                <input type="text" id="shopName" v-model="form.shopName" :class="{ 'is-invalid': errors.shopName }"
+                    required />
+                <span v-if="errors.shopName" class="error">{{ errors.shopName }}</span>
+            </div>
+
+            <!-- Owner Name -->
+            <div class="form-group">
+                <label for="ownerName">Owner Name:</label>
+                <input type="text" id="ownerName" v-model="form.ownerName" :class="{ 'is-invalid': errors.ownerName }"
+                    required />
+                <span v-if="errors.ownerName" class="error">{{ errors.ownerName }}</span>
+            </div>
+
+            <!-- Shop Owner Phone -->
+            <div class="form-group">
+                <label for="phone">Shop Owner Phone Number:</label>
+                <input type="tel" id="phone" v-model="form.phone" :class="{ 'is-invalid': errors.phone }" required
+                    pattern="^\d{10}$" />
+                <span v-if="errors.phone" class="error">{{ errors.phone }}</span>
             </div>
 
             <!-- Address -->
@@ -28,7 +47,7 @@
             <div class="form-group">
                 <label for="chocolates">Number of Chocolates:</label>
                 <input type="number" id="chocolates" v-model.number="form.chocolates"
-                    :class="{ 'is-invalid': errors.chocolates }" required min="1" />
+                    :class="{ 'is-invalid': errors.chocolates }" required />
                 <span v-if="errors.chocolates" class="error">{{ errors.chocolates }}</span>
             </div>
 
@@ -47,18 +66,22 @@
                     Get Current Location
                 </button>
 
-                <!-- Loader spinner -->
+                <!-- Loader spinner for location -->
                 <div v-if="loading" class="loader">Loading...</div>
 
                 <div v-if="form.location && !loading">
                     <p>Latitude: {{ form.location.latitude }}</p>
                     <p>Longitude: {{ form.location.longitude }}</p>
                 </div>
+                <span v-if="errors.location" class="error">{{ errors.location }}</span>
             </div>
+
+            <!-- Loader spinner for form submission -->
+            <div v-if="loadingSubmit" class="loader">Submitting...</div>
 
             <!-- Submit and Reset buttons -->
             <div class="form-group buttons">
-                <button type="submit" :disabled="isFormInvalid">Submit</button>
+                <button type="submit" :disabled="loadingSubmit">Submit</button>
                 <button type="reset">Reset</button>
             </div>
         </form>
@@ -67,48 +90,49 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { getSalesInfo, setSaleInfo } from '@/api';
+import { ref } from 'vue';
+import { setSaleInfo } from '@/api';
 import SaleTable from '@/components/SaleTable.vue';
 
 const form = ref({
-    name: '',
+    ownerName: '',
+    shopName: '',
     salesPersonName: '',
     address: '',
-    chocolates: '',
+    chocolates: 0,
     picture: null,
     location: null,
+    phone: '',  // New phone property
 });
 
 const errors = ref({});
 const loading = ref(false); // Loading state for location fetching
-
-// Computed property to check if the form is invalid
-const isFormInvalid = computed(() => {
-    return !form.value.salesPersonName || !form.value.name || !form.value.address || !form.value.chocolates || Object.keys(errors.value).length > 0;
-});
+const loadingSubmit = ref(false); // New loading state for form submission
 
 // Handle form submission
 const handleSubmit = async () => {
     if (validateForm()) {
-        // Submit form (for example, send data to a server)
-        console.log("Form Submitted", form.value);
+        loadingSubmit.value = true;
         await setSaleInfo(form.value);
-        console.log(await getSalesInfo());
         alert('Form submitted successfully!');
         handleReset();
+        loadingSubmit.value = false; // Hide the loader after form submission
+    } else {
+        alert("Fill form correctly.")
     }
 };
 
 // Reset form
 const handleReset = () => {
     form.value = {
-        name: '',
+        shopName: '',
+        ownerName: '',
         salesPersonName: '',
         address: '',
-        chocolates: '',
+        chocolates: 0,
         picture: null,
         location: null,
+        phone: '',
     };
     errors.value = {};
 };
@@ -153,26 +177,37 @@ const getLocation = () => {
 const validateForm = () => {
     errors.value = {};
 
-    if (!form.value.name) {
-        errors.value.name = 'Name is required';
+    if (!form.value.ownerName) {
+        errors.value.ownerName = 'Owner name is required';
+    }
+    if (!form.value.shopName) {
+        errors.value.shopName = 'Shop name is required';
     }
 
     if (!form.value.salesPersonName) {
-        errors.value.salesPersonName = 'salesPersonName is required';
+        errors.value.salesPersonName = 'SalesPerson name is required';
     }
 
     if (!form.value.address) {
         errors.value.address = 'Address is required';
     }
 
-    if (!form.value.chocolates || form.value.chocolates <= 0) {
+    if (form.value.chocolates < 0) {
         errors.value.chocolates = 'Number of chocolates must be a positive number';
     }
+
+    if (!form.value.phone) {
+        errors.value.phone = 'Phone number is required';
+    } else if (!/^(\d{10})$/.test(form.value.phone)) {
+        errors.value.phone = 'Phone number must be 10 digits';
+    }
+
     if (!form.value.picture) {
         errors.value.picture = 'Image should be clicked';
     }
+
     if (!form.value.location) {
-        errors.value.chocolates = 'Location should be stored';
+        errors.value.location = 'Location should be stored';
     }
 
     return Object.keys(errors.value).length === 0;
@@ -207,6 +242,7 @@ h1 {
 
 input[type="text"],
 input[type="number"],
+input[type="tel"],
 input[type="file"] {
     padding: 8px;
     font-size: 16px;

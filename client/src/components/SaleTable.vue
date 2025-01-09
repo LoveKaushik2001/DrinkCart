@@ -1,25 +1,28 @@
 <template>
     <div>
         <h1 class="page-title">All Form Submissions</h1>
-
+        <span v-if="!forms.length">No Data present yet</span>
         <!-- Table Layout for Desktop -->
         <div class="table-wrapper">
             <table class="table" v-if="!isMobile">
                 <thead>
                     <tr>
                         <th>salesPerson Name</th>
-                        <th>Name</th>
+                        <th>Owner Name</th>
+                        <th>Shop Name</th>
                         <th>Address</th>
                         <th>Chocolates</th>
                         <th>Picture</th>
                         <th>Location</th>
                         <th>Map</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(form, index) in forms" :key="index">
                         <td>{{ form.salesPersonName }}</td>
-                        <td>{{ form.name }}</td>
+                        <td>{{ form.ownerName }}</td>
+                        <td>{{ form.shopName }}</td>
                         <td>{{ form.address }}</td>
                         <td>{{ form.chocolates }}</td>
 
@@ -42,6 +45,11 @@
                                 Open in Map
                             </button>
                         </td>
+
+                        <!-- Delete Button -->
+                        <td>
+                            <button @click="deleteForm(form._id)" class="delete-btn">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -54,7 +62,10 @@
                     <strong>salesPerson Name:</strong> {{ form.salesPersonName }}
                 </div>
                 <div class="entry-item">
-                    <strong>Name:</strong> {{ form.name }}
+                    <strong>Owner Name:</strong> {{ form.ownerName }}
+                </div>
+                <div class="entry-item">
+                    <strong>Shop Name:</strong> {{ form.shopName }}
                 </div>
                 <div class="entry-item">
                     <strong>Address:</strong> {{ form.address }}
@@ -88,6 +99,11 @@
                         Open in Map
                     </button>
                 </div>
+
+                <!-- Delete Button for Mobile -->
+                <div class="entry-item">
+                    <button @click="deleteForm(form._id)" class="delete-btn">Delete</button>
+                </div>
             </div>
         </div>
     </div>
@@ -95,7 +111,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
-import { getSalesInfo } from '@/api';
+import { getSalesInfo, deleteSaleInfo } from '@/api';
 
 const forms = ref([]);
 
@@ -125,6 +141,23 @@ const fetchAllForms = async () => {
 const openMap = (latitude, longitude) => {
     const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(mapUrl, '_blank'); // Open map in a new tab
+};
+
+const deleteForm = async (id) => {
+    if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+            // Call the API to delete the form entry
+            await deleteSaleInfo(id);
+
+            // Remove the form from the local list
+            forms.value = forms.value.filter(form => form.id !== id);
+
+            alert('Form deleted successfully!');
+        } catch (error) {
+            console.error('Error deleting form:', error);
+            alert('An error occurred while deleting the form.');
+        }
+    }
 };
 </script>
 
@@ -223,6 +256,19 @@ const openMap = (latitude, longitude) => {
 
 .map-btn:hover {
     background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
 }
 
 /* Media Query for Mobile (Max 768px) */
