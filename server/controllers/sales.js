@@ -15,7 +15,9 @@ export const setSaleInfo = async (req, res) => {
 
 export const getSalesInfo = async (req, res) => {
   try {
-    const saleInfo = await Sales.find().sort({ createdAt: -1 });
+    const saleInfo = await Sales.find()
+      .sort({ createdAt: -1 })
+      .allowDiskUse(true);
     res.status(200).json(saleInfo);
   } catch (error) {
     res.status(404).json({ message: error.message });
