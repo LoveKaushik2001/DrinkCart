@@ -62,10 +62,10 @@
                                 masterData.itemsToBeDelivered.quinoaSalad }}</p>
                             <p v-if="masterData.itemsToBeDelivered.farmSalad">Farm Salad: {{
                                 masterData.itemsToBeDelivered.farmSalad }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.shikanji">Shikanji: {{
-                                masterData.itemsToBeDelivered.shikanji }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.kokam">Kokam Sharbat: {{
-                                masterData.itemsToBeDelivered.kokam }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.gardenGlow">Garden Glow: {{
+                                masterData.itemsToBeDelivered.gardenGlow }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.whiteDetox">White Detox: {{
+                                masterData.itemsToBeDelivered.whiteDetox }}</p>
                             <p v-if="masterData.itemsToBeDelivered.dhoklaMeal">Dhokla: {{
                                 masterData.itemsToBeDelivered.dhoklaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.upmaMeal">Upma: {{
@@ -74,12 +74,12 @@
                                 masterData.itemsToBeDelivered.theplaMeal }}</p>
                             <p v-if="masterData.itemsToBeDelivered.appeMeal">Appe: {{
                                 masterData.itemsToBeDelivered.appeMeal }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.sabudanaKhichdi">Sabudana Khichdi: {{
-                                masterData.itemsToBeDelivered.sabudanaKhichdi }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.sabudanaCutlet">Sabudana Cutlet: {{
-                                masterData.itemsToBeDelivered.sabudanaCutlet }}</p>
-                            <p v-if="masterData.itemsToBeDelivered.paneerKheer">Paneer Kheer: {{
-                                masterData.itemsToBeDelivered.paneerKheer }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.kebabMeal">Hare bhare kebab: {{
+                                masterData.itemsToBeDelivered.kebabMeal }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.sundaySpecial">Sunday Special: {{
+                                masterData.itemsToBeDelivered.sundaySpecial }}</p>
+                            <p v-if="masterData.itemsToBeDelivered.noirChoclate">Choclate: {{
+                                masterData.itemsToBeDelivered.noirChoclate }}</p>
                         </div>
                         <div class="items-to-deliver flex flex-col space-y-4" style="background-color: beige;">
                             <div style="font-style: oblique; color: rgb(140, 109, 0);">
@@ -198,7 +198,7 @@ const bottleCollectionData = (status: string) => {
     let totalDeliveredBottles = 0;
     if (status === 'delivered') {
         Object.keys(masterData.value.itemsToBeDelivered).forEach(key => {
-            if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('sabudana') && !key.toLowerCase().includes('kheer') && !key.toLowerCase().includes('meal')) {
+            if (!key.toLowerCase().includes('salad') && !key.toLowerCase().includes('meal') && !key.toLowerCase().includes('sundaySpecial') && !key.toLowerCase().includes('noirChoclate')) {
                 const obj = masterData.value.itemsToBeDelivered as any;
                 totalDeliveredBottles += Number(obj[key]);
             }

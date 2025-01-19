@@ -31,11 +31,11 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  shikanji: {
+  gardenGlow: {
     type: Number,
     default: 0,
   },
-  kokam: {
+  whiteDetox: {
     type: Number,
     default: 0,
   },
@@ -67,15 +67,15 @@ const deliverySchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  sabudanaKhichdi: {
+  kebabMeal: {
     type: Number,
     default: 0,
   },
-  sabudanaCutlet: {
+  sundaySpecial: {
     type: Number,
     default: 0,
   },
-  paneerKheer: {
+  noirChoclate: {
     type: Number,
     default: 0,
   },

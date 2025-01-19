@@ -25,8 +25,8 @@
                                             <th class="px-4 py-2">Red</th>
                                             <th class="px-4 py-2">Green</th>
                                             <th class="px-4 py-2">Salad</th>
-                                            <th class="px-4 py-2">Shikanji</th>
-                                            <th class="px-4 py-2">kokam</th>
+                                            <th class="px-4 py-2">Garden Glow</th>
+                                            <th class="px-4 py-2">White Detox</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,9 +54,11 @@
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.farmSalad
                                                     }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.shikanji }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.gardenGlow
+                                                    }}
                                                 </td>
-                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.kokam }}
+                                                <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.whiteDetox
+                                                    }}
                                                 </td>
                                                 <td class="border px-4 py-2">{{ customer.itemsToBeDelivered.dhoklaMeal
                                                     }}
@@ -98,8 +100,8 @@
                     <p v-if="itemsToBeDelivered.sproutSalad">Sprout Salad: {{ itemsToBeDelivered.sproutSalad }}</p>
                     <p v-if="itemsToBeDelivered.quinoaSalad">Quinoa Salad: {{ itemsToBeDelivered.quinoaSalad }}</p>
                     <p v-if="itemsToBeDelivered.farmSalad">Farm Salad: {{ itemsToBeDelivered.farmSalad }}</p>
-                    <p v-if="itemsToBeDelivered.shikanji">Shikanji: {{ itemsToBeDelivered.shikanji }}</p>
-                    <p v-if="itemsToBeDelivered.kokam">Kokam Sharbat: {{ itemsToBeDelivered.kokam }}</p>
+                    <p v-if="itemsToBeDelivered.gardenGlow">Garden Glow: {{ itemsToBeDelivered.gardenGlow }}</p>
+                    <p v-if="itemsToBeDelivered.whiteDetox">White Detox: {{ itemsToBeDelivered.whiteDetox }}</p>
                     <p v-if="itemsToBeDelivered.dhoklaMeal">Dhokla: {{ itemsToBeDelivered.dhoklaMeal }}</p>
                     <p v-if="itemsToBeDelivered.upmaMeal">Upma: {{ itemsToBeDelivered.upmaMeal }}</p>
                     <p v-if="itemsToBeDelivered.theplaMeal">Thepla: {{ itemsToBeDelivered.theplaMeal }}</p>
@@ -145,8 +147,8 @@ const itemsToBeDelivered = ref({
     sproutSalad: 0,
     quinoaSalad: 0,
     farmSalad: 0,
-    shikanji: 0,
-    kokam: 0,
+    gardenGlow: 0,
+    whiteDetox: 0,
     dhoklaMeal: 0,
     upmaMeal: 0,
     theplaMeal: 0,
@@ -161,8 +163,8 @@ const getDeliveryDataToBeDelivered = () => {
         itemsToBeDelivered.value.sproutSalad += (customer.itemsToBeDelivered.sproutSalad)
         itemsToBeDelivered.value.quinoaSalad += (customer.itemsToBeDelivered.quinoaSalad)
         itemsToBeDelivered.value.farmSalad += (customer.itemsToBeDelivered.farmSalad)
-        itemsToBeDelivered.value.shikanji += (customer.itemsToBeDelivered.shikanji)
-        itemsToBeDelivered.value.kokam += (customer.itemsToBeDelivered.kokam)
+        itemsToBeDelivered.value.gardenGlow += (customer.itemsToBeDelivered.gardenGlow)
+        itemsToBeDelivered.value.whiteDetox += (customer.itemsToBeDelivered.whiteDetox)
         itemsToBeDelivered.value.dhoklaMeal += (customer.itemsToBeDelivered.dhoklaMeal)
         itemsToBeDelivered.value.upmaMeal += (customer.itemsToBeDelivered.upmaMeal)
         itemsToBeDelivered.value.theplaMeal += (customer.itemsToBeDelivered.theplaMeal)

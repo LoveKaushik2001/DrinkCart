@@ -13,15 +13,15 @@ export interface IDeliveryInfo {
   sproutSalad: number;
   quinoaSalad: number;
   farmSalad: number;
-  shikanji: number;
-  kokam: number;
+  gardenGlow: number;
+  whiteDetox: number;
   dhoklaMeal: number;
   upmaMeal: number;
   theplaMeal: number;
   appeMeal: number;
-  sabudanaKhichdi: number;
-  sabudanaCutlet: number;
-  paneerKheer: number;
+  kebabMeal: number;
+  sundaySpecial: number;
+  noirChoclate: number;
 }
 
 export interface IClubbedData {
