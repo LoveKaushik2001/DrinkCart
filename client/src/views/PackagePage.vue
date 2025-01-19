@@ -17,8 +17,8 @@
                             <span v-if="route.papayaPunch">Papaya Punch - PP: {{ route.papayaPunch }}</span>
                             <span v-if="route.greenDetox">Green Detox - GD: {{ route.greenDetox }}</span>
                             <span v-if="route.roseKatira">Rose Katira - RK: {{ route.roseKatira }}</span>
-                            <span v-if="route.kokam">Kokam Sharbat - KS: {{ route.kokam }}</span>
-                            <span v-if="route.shikanji">Shikanji - AS: {{ route.shikanji }}</span>
+                            <span v-if="route.whiteDetox">White Detox - WD: {{ route.whiteDetox }}</span>
+                            <span v-if="route.gardenGlow">Garden Glow - GG: {{ route.gardenGlow }}</span>
                             <span v-if="route.quinoaSalad">Quinoa Salad - QS: {{ route.quinoaSalad }}</span>
                             <span v-if="route.sproutSalad">Sprout Salad - SS: {{ route.sproutSalad }}</span>
                             <span v-if="route.farmSalad">Farm Salad - FS: {{ route.farmSalad }}</span>
@@ -26,9 +26,9 @@
                             <span v-if="route.upmaMeal">Upma - um: {{ route.upmaMeal }}</span>
                             <span v-if="route.theplaMeal">Thepla - tm: {{ route.theplaMeal }}</span>
                             <span v-if="route.appeMeal">Appe - am: {{ route.appeMeal }}</span>
-                            <span v-if="route.sabudanaKhichdi">Sabudana Khichdi - sk: {{ route.sabudanaKhichdi }}</span>
-                            <span v-if="route.sabudanaCutlet">Sabudana Cutlet - sc: {{ route.sabudanaCutlet }}</span>
-                            <span v-if="route.paneerKheer">Paneer Kheer - pk: {{ route.paneerKheer }}</span>
+                            <span v-if="route.kebabMeal">Hare Bhare Kebab - HK: {{ route.kebabMeal }}</span>
+                            <span v-if="route.sundaySpecial">Sunday Special - (ss): {{ route.sundaySpecial }}</span>
+                            <span v-if="route.noirChoclate">Choclate - nc: {{ route.noirChoclate }}</span>
                         </div>
                     </div>
                 </div>

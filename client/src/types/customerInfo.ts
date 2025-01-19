@@ -23,11 +23,11 @@ export interface IItems {
   theplaMeal: number;
   appeMeal: number;
   farmSalad: number;
-  shikanji: number;
-  kokam: number;
-  sabudanaKhichdi: number;
-  sabudanaCutlet: number;
-  paneerKheer: number;
+  gardenGlow: number;
+  whiteDetox: number;
+  kebabMeal: number;
+  sundaySpecial: number;
+  noirChoclate: number;
 }
 
 export interface ILocationCoordinates {
